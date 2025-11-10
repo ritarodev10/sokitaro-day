@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import SookitaroHeader from "./main-image/SookitaroHeader";
-import WeddingCoupleWithSign from "./WeddingCoupleWithSign";
+import WeddingCoupleWithSign from "./main-image/WeddingCoupleWithSign";
 import DateBanner from "./main-image/DateBanner";
 
 interface SookitaroWeddingImageProps {
