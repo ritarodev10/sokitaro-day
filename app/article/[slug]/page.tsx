@@ -14,7 +14,7 @@ export default function ArticlePage() {
   return (
     <div className="paper-craft-background">
       <div className="relative z-10 flex min-h-dvh flex-col">
-        <div className="relative w-full flex-1 flex items-center justify-center pb-20">
+        <div className="relative w-full flex-1 flex items-center justify-center pb-10">
           <SookitaroWeddingImage className="w-full h-full max-h-[85vh] md:max-h-[800px] object-contain multiply-blend" />
         </div>
         <BottomControlsWrapper />
