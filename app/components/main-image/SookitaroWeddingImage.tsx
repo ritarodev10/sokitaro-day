@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useState, useRef } from "react";
+import { useRouter, usePathname } from "next/navigation";
 import SookitaroHeader from "./SookitaroHeader";
 import WeddingCoupleWithSign from "./WeddingCoupleWithSign";
 import DateBanner from "./DateBanner";
@@ -18,16 +19,41 @@ interface SookitaroWeddingImageProps {
   className?: string;
 }
 
+// Map article slugs to indices
+const articleSlugs = ["headline", "article-2"];
+const getArticleIndex = (slug?: string): number => {
+  if (!slug) return -1;
+  const index = articleSlugs.indexOf(slug);
+  return index >= 0 ? index : -1;
+};
+
+const getArticleSlug = (index: number): string => {
+  return articleSlugs[index] || "headline";
+};
+
 export default function SookitaroWeddingImage({
   className,
 }: SookitaroWeddingImageProps) {
+  const router = useRouter();
+  const pathname = usePathname();
+  
   // Animation state for DateBanner reveal
   const [revealProgress, setRevealProgress] = useState(0);
   const animationFrameRef = useRef<number | null>(null);
-  // Popup state
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  // Popup navigation state
-  const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
+  
+  // Derive popup state from route
+  const getArticleIndexFromPath = () => {
+    if (pathname.startsWith("/article/")) {
+      const slug = pathname.split("/article/")[1];
+      return getArticleIndex(slug);
+    }
+    return -1;
+  };
+
+  const articleIndexFromPath = getArticleIndexFromPath();
+  const isPopupOpen = articleIndexFromPath >= 0;
+  const currentPopupIndex = articleIndexFromPath >= 0 ? articleIndexFromPath : 0;
+  
   // Glow visibility state - starts hidden, appears after all animations
   const [showGlow, setShowGlow] = useState(false);
 
@@ -38,15 +64,25 @@ export default function SookitaroWeddingImage({
     // Add more popup contents here as needed
   ];
 
+  const handleOpenPopup = () => {
+    router.push("/article/headline");
+  };
+
+  const handleClose = () => {
+    router.push("/");
+  };
+
   const handleNext = () => {
     if (currentPopupIndex < popupContents.length - 1) {
-      setCurrentPopupIndex(currentPopupIndex + 1);
+      const nextIndex = currentPopupIndex + 1;
+      router.push(`/article/${getArticleSlug(nextIndex)}`);
     }
   };
 
   const handlePrevious = () => {
     if (currentPopupIndex > 0) {
-      setCurrentPopupIndex(currentPopupIndex - 1);
+      const prevIndex = currentPopupIndex - 1;
+      router.push(`/article/${getArticleSlug(prevIndex)}`);
     }
   };
 
@@ -121,7 +157,7 @@ export default function SookitaroWeddingImage({
           <Newspaper
             className="z-50"
             filter={showGlow ? "url(#newspaperGlow)" : undefined}
-            onClick={() => setIsPopupOpen(true)}
+            onClick={handleOpenPopup}
           />
           {/* Date Banner Section */}
           <g clipPath="url(#dateBannerRevealClip)">
@@ -194,10 +230,7 @@ export default function SookitaroWeddingImage({
       {/* Popup Modal */}
       <Popup
         isOpen={isPopupOpen}
-        onClose={() => {
-          setIsPopupOpen(false);
-          setCurrentPopupIndex(0); // Reset to first item when closing
-        }}
+        onClose={handleClose}
         onNext={handleNext}
         onPrevious={handlePrevious}
         hasNext={currentPopupIndex < popupContents.length - 1}
