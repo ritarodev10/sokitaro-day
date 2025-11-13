@@ -15,7 +15,10 @@ import SookitaroText from "./SookitaroText";
 import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
 import Envelope from "../Envelope";
-import { playNewspaperSound, playNewspaperClosedSound } from "../../utils/sounds";
+import {
+  playNewspaperSound,
+  playNewspaperClosedSound,
+} from "../../utils/sounds";
 
 interface SookitaroWeddingImageProps {
   className?: string;
@@ -100,7 +103,7 @@ export default function SookitaroWeddingImage({
   const handleEnvelopeClose = () => {
     // Play newspaper closed sound
     playNewspaperClosedSound();
-    
+
     // Just close the envelope, don't navigate
     setIsEnvelopeOpen(false);
   };
@@ -108,7 +111,7 @@ export default function SookitaroWeddingImage({
   const handleClose = () => {
     // Play newspaper closed sound
     playNewspaperClosedSound();
-    
+
     // Don't change route, just close the popup by setting force close state
     setIsPopupForceClosed(true);
   };

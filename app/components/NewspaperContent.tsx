@@ -24,7 +24,8 @@ export default function NewspaperContent({
           linear-gradient(135deg, rgba(139, 69, 19, 0.1) 0%, rgba(101, 67, 33, 0.05) 100%),
           linear-gradient(0deg, rgba(0, 0, 0, 0.03) 0%, rgba(0, 0, 0, 0) 100%)
         `,
-        backgroundSize: "200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%",
+        backgroundSize:
+          "200px 200px, 100% 100%, 100% 100%, 100% 100%, 100% 100%",
         backgroundRepeat: "repeat, no-repeat, no-repeat, no-repeat, no-repeat",
         filter: "sepia(25%) contrast(1.15) brightness(0.92) saturate(0.9)",
         position: "relative",
@@ -55,7 +56,7 @@ export default function NewspaperContent({
           mixBlendMode: "multiply",
         }}
       />
-      
+
       {/* Additional aged spots */}
       <div
         className="absolute inset-0 pointer-events-none opacity-40"
@@ -182,7 +183,8 @@ export default function NewspaperContent({
                 fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
             >
-              <strong>Riza</strong>— &apos;You can ask Sukma for that question.&apos;
+              <strong>Riza</strong>— &apos;You can ask Sukma for that
+              question.&apos;
             </p>
           </div>
 
@@ -219,7 +221,8 @@ export default function NewspaperContent({
                 fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
             >
-              <strong>Sukma</strong>— &apos;Bismillah. Please come with doa.&apos;
+              <strong>Sukma</strong>— &apos;Bismillah. Please come with
+              doa.&apos;
             </p>
           </div>
         </div>
@@ -256,7 +259,10 @@ export default function NewspaperContent({
                 marginBottom: "clamp(0.75rem, 2vh, 1rem)",
               }}
             >
-              WAGIR – The talk of the town: Riza and Sukma. People joke it&apos;s love, signed, sealed, Riza dodged anmily it&apos;s love, signed smile, Sokma answered warm, smile. The &apos;sign&apos; day reportedly will be called Sookitaro Day.
+              WAGIR – The talk of the town: Riza and Sukma. People joke
+              it&apos;s love, signed, sealed, Riza dodged anmily it&apos;s love,
+              signed smile, Sokma answered warm, smile. The &apos;sign&apos; day
+              reportedly will be called Sookitaro Day.
             </p>
           </div>
         </div>
@@ -264,4 +270,3 @@ export default function NewspaperContent({
     </div>
   );
 }
-
