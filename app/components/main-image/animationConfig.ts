@@ -36,6 +36,13 @@ export const wreathAnimationConfig = {
   duration: 0.4, // seconds
 } as const;
 
+// Newspaper Glow Animation Configuration
+// Starts after all animations complete:
+// - Date banner finishes: initialDelay (5000ms) + duration (3000ms) = 8000ms
+export const newspaperGlowAnimationConfig = {
+  initialDelay: 8000, // milliseconds - delay before glow animation starts (after all animations)
+} as const;
+
 /**
  * Calculate animation delay for a specific element index in a reversed sequence
  * @param totalElements - Total number of elements in the wreath
