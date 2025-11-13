@@ -75,8 +75,13 @@ export default function SookitaroWeddingImage({
   ];
 
   const handleOpenPopup = () => {
-    // Show envelope popup first (on root page, no route change)
-    setIsEnvelopeOpen(true);
+    // If on home page, show envelope. If on article route, open article popup directly
+    if (pathname === "/") {
+      setIsEnvelopeOpen(true);
+    } else {
+      // Already on article route, just open the popup
+      setIsPopupForceClosed(false);
+    }
   };
 
   const handleEnvelopeOpen = () => {
@@ -252,8 +257,8 @@ export default function SookitaroWeddingImage({
         </defs>
       </svg>
 
-      {/* Envelope Popup - shown on root page before navigating to article */}
-      {isEnvelopeOpen && (
+      {/* Envelope Popup - only shown on home page (root route) */}
+      {isEnvelopeOpen && pathname === "/" && (
         <div
           className="fixed inset-0 z-[100] flex items-center justify-center"
           onClick={handleEnvelopeClose}
