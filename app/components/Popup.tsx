@@ -35,57 +35,127 @@ export default function Popup({
         backgroundColor: "rgba(0, 0, 0, 0.05)",
       }}
     >
-      {/* Popup Container - Fixed Size */}
+      {/* Container for popup and buttons - Portrait newspaper size */}
       <div
-        className={`relative w-[95vw] md:w-[800px] h-[70vh] md:h-[600px] mx-4 border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)] ${className}`}
+        className="flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
         style={{
-          backgroundColor: "transparent",
+          width: "min(90vw, 600px)",
+          maxWidth: "min(90vw, 600px)",
         }}
       >
-        {/* Close button - brutalism style */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 w-10 h-10 border-4 border-black bg-white hover:bg-black hover:text-white text-black font-black text-2xl flex items-center justify-center transition-all duration-150 z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
-          aria-label="Close"
+        {/* Popup Container - Portrait newspaper with 3:4 aspect ratio */}
+        <div
+          className={`relative border-black ${className}`}
+          style={{
+            backgroundColor: "transparent",
+            width: "min(90vw, 600px)",
+            aspectRatio: "3 / 4",
+            maxHeight: "80vh",
+            borderWidth: "clamp(2px, 0.5vw, 4px)",
+            boxShadow: "clamp(4px, 1vw, 8px) clamp(4px, 1vw, 8px) 0px 0px rgba(0,0,0,1)",
+          }}
         >
-          ×
-        </button>
-        {/* Scrollable Popup content */}
-        <div className="h-full overflow-y-auto overflow-x-hidden">
-          {children}
+          {/* Close button - brutalism style */}
+          <button
+            onClick={onClose}
+            className="absolute bg-white hover:bg-black hover:text-white text-black font-black flex items-center justify-center transition-all duration-150 z-10"
+            style={{
+              top: "clamp(0.5rem, 1vh, 1rem)",
+              right: "clamp(0.5rem, 1vh, 1rem)",
+              width: "clamp(2rem, 4vw, 2.5rem)",
+              height: "clamp(2rem, 4vw, 2.5rem)",
+              fontSize: "clamp(1rem, 2vw, 1.5rem)",
+              borderWidth: "clamp(1px, 0.3vw, 2px)",
+              borderColor: "black",
+              borderStyle: "solid",
+              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.transform = "translate(0, 0)";
+            }}
+            aria-label="Close"
+          >
+            ×
+          </button>
+          {/* Scrollable Popup content */}
+          <div className="h-full overflow-y-auto overflow-x-hidden">
+            {children}
+          </div>
         </div>
-      </div>
 
-      {/* Navigation Buttons - Below the popup, separated */}
-      <div
-        className="flex gap-4 mt-6"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onPrevious}
-          disabled={!hasPrevious}
-          className={`px-8 py-3 border-4 border-black font-black text-lg transition-all duration-150 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-            hasPrevious
-              ? "bg-white hover:bg-black hover:text-white text-black hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] cursor-pointer"
-              : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
-          }`}
-          aria-label="Previous"
+        {/* Navigation Buttons - Below the popup, separated */}
+        <div
+          className="flex flex-shrink-0"
+          style={{
+            marginTop: "clamp(0.5rem, 1.5vh, 1.5rem)",
+            gap: "clamp(0.75rem, 2vw, 1rem)",
+          }}
         >
-          ← Previous
-        </button>
-        <button
-          onClick={onNext}
-          disabled={!hasNext}
-          className={`px-8 py-3 border-4 border-black font-black text-lg transition-all duration-150 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${
-            hasNext
-              ? "bg-white hover:bg-black hover:text-white text-black hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] cursor-pointer"
-              : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
-          }`}
-          aria-label="Next"
-        >
-          Next →
-        </button>
+          <button
+            onClick={onPrevious}
+            disabled={!hasPrevious}
+            className={`border-black font-black transition-all duration-150 ${
+              hasPrevious
+                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer"
+                : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
+            }`}
+            style={{
+              padding: "clamp(0.5rem, 1.5vh, 0.75rem) clamp(1rem, 3vw, 2rem)",
+              fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
+              borderWidth: "clamp(1px, 0.3vw, 2px)",
+              borderStyle: "solid",
+              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+            }}
+            onMouseEnter={(e) => {
+              if (hasPrevious) {
+                e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+                e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.transform = "translate(0, 0)";
+            }}
+            aria-label="Previous"
+          >
+            ← Previous
+          </button>
+          <button
+            onClick={onNext}
+            disabled={!hasNext}
+            className={`border-black font-black transition-all duration-150 ${
+              hasNext
+                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer"
+                : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
+            }`}
+            style={{
+              padding: "clamp(0.5rem, 1.5vh, 0.75rem) clamp(1rem, 3vw, 2rem)",
+              fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
+              borderWidth: "clamp(1px, 0.3vw, 2px)",
+              borderStyle: "solid",
+              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+            }}
+            onMouseEnter={(e) => {
+              if (hasNext) {
+                e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+                e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+              }
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.transform = "translate(0, 0)";
+            }}
+            aria-label="Next"
+          >
+            Next →
+          </button>
+        </div>
       </div>
     </div>
   );

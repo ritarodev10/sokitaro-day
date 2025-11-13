@@ -11,10 +11,12 @@ export default function NewspaperContent({
 }: NewspaperContentProps) {
   return (
     <div
-      className="relative p-8 pt-12"
+      className="relative"
       style={{
         fontFamily: "var(--font-playfair-display)",
         backgroundColor: "#f5f1e8",
+        padding: "clamp(1rem, 3vw, 2rem)",
+        paddingTop: "clamp(1.5rem, 4vw, 3rem)",
         backgroundImage: `
           url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.4'/%3E%3C/svg%3E"),
           radial-gradient(circle at 20% 50%, rgba(139, 69, 19, 0.15) 0%, transparent 50%),
@@ -71,24 +73,33 @@ export default function NewspaperContent({
       {/* Newspaper Content */}
       <div className="relative z-10">
         {/* Header */}
-        <div className="text-center mb-6 border-b-4 border-black pb-4">
+        <div
+          className="text-center border-b border-black"
+          style={{
+            marginBottom: "clamp(1rem, 2.5vh, 1.5rem)",
+            paddingBottom: "clamp(0.75rem, 2vh, 1rem)",
+            borderBottomWidth: "clamp(2px, 0.5vw, 4px)",
+          }}
+        >
           <h1
-            className="text-5xl md:text-6xl font-bold mb-2"
+            className="font-bold"
             style={{
               fontFamily: "var(--font-bebas-neue)",
+              fontSize: "clamp(2rem, 6vw, 3.75rem)",
               letterSpacing: "0.1em",
               color: "#1a1a1a",
               textShadow: "2px 2px 0px rgba(0,0,0,0.1)",
+              marginBottom: "clamp(0.5rem, 1vh, 0.75rem)",
             }}
           >
             THE SOOKITARO POST
           </h1>
           <p
-            className="text-lg md:text-xl"
             style={{
               fontFamily: "var(--font-playfair-display)",
               fontStyle: "italic",
               color: "#4a4a4a",
+              fontSize: "clamp(0.875rem, 2vw, 1.25rem)",
             }}
           >
             Special Edition – 17 November 2025
@@ -96,24 +107,34 @@ export default function NewspaperContent({
         </div>
 
         {/* Main Headline */}
-        <div className="mb-6 border-b-2 border-black pb-4">
+        <div
+          className="border-b border-black"
+          style={{
+            marginBottom: "clamp(1rem, 2.5vh, 1.5rem)",
+            paddingBottom: "clamp(0.75rem, 2vh, 1rem)",
+            borderBottomWidth: "clamp(1px, 0.3vw, 2px)",
+          }}
+        >
           <h2
-            className="text-3xl md:text-4xl font-bold mb-2 leading-tight"
+            className="font-bold leading-tight"
             style={{
               fontFamily: "var(--font-bebas-neue)",
+              fontSize: "clamp(1.25rem, 4vw, 2.25rem)",
               letterSpacing: "0.05em",
               color: "#1a1a1a",
               lineHeight: "1.1",
+              marginBottom: "clamp(0.5rem, 1vh, 0.75rem)",
             }}
           >
             The Biggest Heart in Wagir Will Be &apos;Acquired&apos; Soon
           </h2>
           <p
-            className="text-xl md:text-2xl mb-4"
             style={{
               fontFamily: "var(--font-playfair-display)",
               fontStyle: "italic",
               color: "#2a2a2a",
+              fontSize: "clamp(0.875rem, 2.5vw, 1.5rem)",
+              marginBottom: "clamp(0.75rem, 2vh, 1rem)",
             }}
           >
             From Blitar to Wagir: Soon to Be One
@@ -121,17 +142,44 @@ export default function NewspaperContent({
         </div>
 
         {/* Two Column Layout for Images */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+        <div
+          className="grid grid-cols-2"
+          style={{
+            gap: "clamp(0.75rem, 2vw, 1.5rem)",
+            marginBottom: "clamp(1rem, 2.5vh, 1.5rem)",
+          }}
+        >
           {/* Left Panel - Riza */}
-          <div className="border-2 border-black p-4 bg-white/50">
-            <div className="mb-4 relative h-64 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center">
-              <span className="text-gray-500 text-sm">Riza Image Placeholder</span>
+          <div
+            className="border border-black bg-white/50"
+            style={{
+              padding: "clamp(0.5rem, 1.5vw, 1rem)",
+              borderWidth: "clamp(1px, 0.3vw, 2px)",
+            }}
+          >
+            <div
+              className="relative bg-gray-200 border border-dashed border-gray-400 flex items-center justify-center"
+              style={{
+                marginBottom: "clamp(0.75rem, 2vh, 1rem)",
+                height: "clamp(8rem, 20vh, 16rem)",
+                borderWidth: "clamp(1px, 0.3vw, 2px)",
+              }}
+            >
+              <span
+                className="text-gray-500"
+                style={{
+                  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)",
+                }}
+              >
+                Riza Image Placeholder
+              </span>
             </div>
             <p
-              className="text-sm md:text-base italic text-center"
+              className="italic text-center"
               style={{
                 fontFamily: "var(--font-playfair-display)",
                 color: "#1a1a1a",
+                fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
             >
               <strong>Riza</strong>— &apos;You can ask Sukma for that question.&apos;
@@ -139,15 +187,36 @@ export default function NewspaperContent({
           </div>
 
           {/* Right Panel - Sukma */}
-          <div className="border-2 border-black p-4 bg-white/50">
-            <div className="mb-4 relative h-64 bg-gray-200 border-2 border-dashed border-gray-400 flex items-center justify-center">
-              <span className="text-gray-500 text-sm">Sukma Image Placeholder</span>
+          <div
+            className="border border-black bg-white/50"
+            style={{
+              padding: "clamp(0.5rem, 1.5vw, 1rem)",
+              borderWidth: "clamp(1px, 0.3vw, 2px)",
+            }}
+          >
+            <div
+              className="relative bg-gray-200 border border-dashed border-gray-400 flex items-center justify-center"
+              style={{
+                marginBottom: "clamp(0.75rem, 2vh, 1rem)",
+                height: "clamp(8rem, 20vh, 16rem)",
+                borderWidth: "clamp(1px, 0.3vw, 2px)",
+              }}
+            >
+              <span
+                className="text-gray-500"
+                style={{
+                  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)",
+                }}
+              >
+                Sukma Image Placeholder
+              </span>
             </div>
             <p
-              className="text-sm md:text-base italic text-center"
+              className="italic text-center"
               style={{
                 fontFamily: "var(--font-playfair-display)",
                 color: "#1a1a1a",
+                fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
             >
               <strong>Sukma</strong>— &apos;Bismillah. Please come with doa.&apos;
@@ -156,26 +225,37 @@ export default function NewspaperContent({
         </div>
 
         {/* Article Text */}
-        <div className="mt-6">
+        <div
+          style={{
+            marginTop: "clamp(1rem, 2.5vh, 1.5rem)",
+          }}
+        >
           <p
-            className="text-sm md:text-base mb-2 font-semibold"
+            className="font-semibold"
             style={{
               fontFamily: "var(--font-playfair-display)",
               color: "#1a1a1a",
+              fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
+              marginBottom: "clamp(0.5rem, 1vh, 0.75rem)",
             }}
           >
             WAGIR CITY – Malang
           </p>
           <div
-            className="text-base md:text-lg leading-relaxed"
+            className="leading-relaxed"
             style={{
               fontFamily: "var(--font-playfair-display)",
               color: "#2a2a2a",
+              fontSize: "clamp(0.625rem, 2vw, 1.125rem)",
               columnCount: layout === "default" ? 2 : 1,
-              columnGap: "2rem",
+              columnGap: "clamp(1rem, 2.5vw, 2rem)",
             }}
           >
-            <p className="mb-4">
+            <p
+              style={{
+                marginBottom: "clamp(0.75rem, 2vh, 1rem)",
+              }}
+            >
               WAGIR – The talk of the town: Riza and Sukma. People joke it&apos;s love, signed, sealed, Riza dodged anmily it&apos;s love, signed smile, Sokma answered warm, smile. The &apos;sign&apos; day reportedly will be called Sookitaro Day.
             </p>
           </div>
