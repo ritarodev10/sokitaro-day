@@ -14,6 +14,7 @@ import Ornaments from "./Ornaments";
 import SookitaroText from "./SookitaroText";
 import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
+import Envelope from "../Envelope";
 
 interface SookitaroWeddingImageProps {
   className?: string;
@@ -43,6 +44,9 @@ export default function SookitaroWeddingImage({
 
   // Local state to override route-based popup state when closing
   const [isPopupForceClosed, setIsPopupForceClosed] = useState(false);
+  
+  // Envelope popup state (shown on root page before navigating to article)
+  const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
   // Derive popup state from route
   const getArticleIndexFromPath = () => {
@@ -71,7 +75,19 @@ export default function SookitaroWeddingImage({
   ];
 
   const handleOpenPopup = () => {
+    // Show envelope popup first (on root page, no route change)
+    setIsEnvelopeOpen(true);
+  };
+
+  const handleEnvelopeOpen = () => {
+    // Close envelope and navigate to article
+    setIsEnvelopeOpen(false);
     router.push("/article/headline");
+  };
+
+  const handleEnvelopeClose = () => {
+    // Just close the envelope, don't navigate
+    setIsEnvelopeOpen(false);
   };
 
   const handleClose = () => {
@@ -236,7 +252,22 @@ export default function SookitaroWeddingImage({
         </defs>
       </svg>
 
-      {/* Popup Modal */}
+      {/* Envelope Popup - shown on root page before navigating to article */}
+      <Popup
+        isOpen={isEnvelopeOpen}
+        onClose={handleEnvelopeClose}
+      >
+        <div className="flex items-center justify-center w-full h-full p-8">
+          <Envelope
+            onClick={handleEnvelopeOpen}
+            width={600}
+            height={450}
+            className="cursor-pointer hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+      </Popup>
+
+      {/* Article Popup Modal */}
       <Popup
         isOpen={isPopupOpen}
         onClose={handleClose}

@@ -28,7 +28,7 @@ export default function Envelope({
       }}
     >
       <Image
-        src="/assets/envelope clean.svg"
+        src="/assets/envelope-clean.svg"
         alt="Envelope"
         width={width || 800}
         height={height || 600}
@@ -41,4 +41,3 @@ export default function Envelope({
     </div>
   );
 }
-
