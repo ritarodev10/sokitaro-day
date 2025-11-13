@@ -15,7 +15,7 @@ import SookitaroText from "./SookitaroText";
 import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
 import Envelope from "../Envelope";
-import { playNewspaperSound } from "../../utils/sounds";
+import { playNewspaperSound, playNewspaperClosedSound } from "../../utils/sounds";
 
 interface SookitaroWeddingImageProps {
   className?: string;
@@ -78,7 +78,7 @@ export default function SookitaroWeddingImage({
   const handleOpenPopup = () => {
     // Play newspaper sound
     playNewspaperSound();
-    
+
     // If on home page, show envelope. If on article route, open article popup directly
     if (pathname === "/") {
       setIsEnvelopeOpen(true);
@@ -91,18 +91,24 @@ export default function SookitaroWeddingImage({
   const handleEnvelopeOpen = () => {
     // Play newspaper sound
     playNewspaperSound();
-    
+
     // Close envelope and navigate to article
     setIsEnvelopeOpen(false);
     router.push("/article/headline");
   };
 
   const handleEnvelopeClose = () => {
+    // Play newspaper closed sound
+    playNewspaperClosedSound();
+    
     // Just close the envelope, don't navigate
     setIsEnvelopeOpen(false);
   };
 
   const handleClose = () => {
+    // Play newspaper closed sound
+    playNewspaperClosedSound();
+    
     // Don't change route, just close the popup by setting force close state
     setIsPopupForceClosed(true);
   };
@@ -111,7 +117,7 @@ export default function SookitaroWeddingImage({
     if (currentPopupIndex < popupContents.length - 1) {
       // Play newspaper sound
       playNewspaperSound();
-      
+
       const nextIndex = currentPopupIndex + 1;
       setIsPopupForceClosed(false); // Reset force close when navigating
       router.push(`/article/${getArticleSlug(nextIndex)}`);
@@ -122,7 +128,7 @@ export default function SookitaroWeddingImage({
     if (currentPopupIndex > 0) {
       // Play newspaper sound
       playNewspaperSound();
-      
+
       const prevIndex = currentPopupIndex - 1;
       setIsPopupForceClosed(false); // Reset force close when navigating
       router.push(`/article/${getArticleSlug(prevIndex)}`);

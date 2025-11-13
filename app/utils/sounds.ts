@@ -13,3 +13,16 @@ export const playNewspaperSound = () => {
   }
 };
 
+export const playNewspaperClosedSound = () => {
+  try {
+    const audio = new Audio("/assets/sounds/newspaper-closed.mp3");
+    audio.volume = 0.5; // Set volume to 50%
+    audio.play().catch((error) => {
+      // Handle autoplay restrictions
+      console.log("Sound play prevented:", error);
+    });
+  } catch (error) {
+    console.log("Error playing sound:", error);
+  }
+};
+
