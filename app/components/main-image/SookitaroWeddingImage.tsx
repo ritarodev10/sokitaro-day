@@ -11,6 +11,8 @@ import {
 import Newspaper from "./Newspaper";
 import Ornaments from "./Ornaments";
 import SookitaroText from "./SookitaroText";
+import Popup from "../Popup";
+import NewspaperContent from "../NewspaperContent";
 
 interface SookitaroWeddingImageProps {
   className?: string;
@@ -24,8 +26,29 @@ export default function SookitaroWeddingImage({
   const animationFrameRef = useRef<number | null>(null);
   // Popup state
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  // Popup navigation state
+  const [currentPopupIndex, setCurrentPopupIndex] = useState(0);
   // Glow visibility state - starts hidden, appears after all animations
   const [showGlow, setShowGlow] = useState(false);
+
+  // Example: You can have multiple popup contents
+  const popupContents = [
+    <NewspaperContent key={0} layout="default" />,
+    <NewspaperContent key={1} layout="alternative" />,
+    // Add more popup contents here as needed
+  ];
+
+  const handleNext = () => {
+    if (currentPopupIndex < popupContents.length - 1) {
+      setCurrentPopupIndex(currentPopupIndex + 1);
+    }
+  };
+
+  const handlePrevious = () => {
+    if (currentPopupIndex > 0) {
+      setCurrentPopupIndex(currentPopupIndex - 1);
+    }
+  };
 
   useEffect(() => {
     // Trigger the animation after component mounts
@@ -169,53 +192,19 @@ export default function SookitaroWeddingImage({
       </svg>
 
       {/* Popup Modal */}
-      {isPopupOpen && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center"
-          onClick={() => setIsPopupOpen(false)}
-          style={{
-            backdropFilter: "blur(8px)",
-            WebkitBackdropFilter: "blur(8px)",
-            backgroundColor: "rgba(0, 0, 0, 0.05)",
-          }}
-        >
-          <div
-            className="relative max-w-2xl w-full mx-4 max-h-[90vh] overflow-y-auto border-4 border-black shadow-[8px_8px_0px_0px_rgba(0,0,0,1)]"
-            onClick={(e) => e.stopPropagation()}
-            style={{
-              backgroundColor: "rgba(255, 255, 255, 0.85)",
-              backdropFilter: "blur(20px) saturate(180%)",
-              WebkitBackdropFilter: "blur(20px) saturate(180%)",
-              boxShadow:
-                "8px 8px 0px 0px rgba(0,0,0,1), 0 8px 32px 0 rgba(31, 38, 135, 0.15)",
-            }}
-          >
-            {/* Close button - brutalism style */}
-            <button
-              onClick={() => setIsPopupOpen(false)}
-              className="absolute top-4 right-4 w-10 h-10 border-4 border-black bg-white hover:bg-black hover:text-white text-black font-black text-2xl flex items-center justify-center transition-all duration-150 z-10 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px]"
-              aria-label="Close"
-            >
-              ×
-            </button>
-            {/* Popup content */}
-            <div className="p-8 pt-12">
-              <h2 className="text-4xl font-black mb-6 text-center uppercase tracking-tight border-b-4 border-black pb-4">
-                Newspaper Article
-              </h2>
-              <div className="prose max-w-none">
-                <p className="text-xl mb-4 font-bold leading-relaxed">
-                  This is where your newspaper content will appear. You can add
-                  any content here - text, images, or other components.
-                </p>
-                <p className="text-lg text-black font-semibold">
-                  Click outside the popup or use the × button to close.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      )}
+      <Popup
+        isOpen={isPopupOpen}
+        onClose={() => {
+          setIsPopupOpen(false);
+          setCurrentPopupIndex(0); // Reset to first item when closing
+        }}
+        onNext={handleNext}
+        onPrevious={handlePrevious}
+        hasNext={currentPopupIndex < popupContents.length - 1}
+        hasPrevious={currentPopupIndex > 0}
+      >
+        {popupContents[currentPopupIndex]}
+      </Popup>
     </>
   );
 }
