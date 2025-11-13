@@ -35,22 +35,22 @@ export default function Popup({
         backgroundColor: "rgba(0, 0, 0, 0.05)",
       }}
     >
-      {/* Container for popup and buttons - Portrait newspaper size */}
+      {/* Container for popup and buttons - Landscape newspaper size */}
       <div
         className="flex flex-col items-center justify-center"
         onClick={(e) => e.stopPropagation()}
         style={{
-          width: "min(90vw, 600px)",
-          maxWidth: "min(90vw, 600px)",
+          width: "min(90vw, 800px)",
+          maxWidth: "min(90vw, 800px)",
         }}
       >
-        {/* Popup Container - Portrait newspaper with 3:4 aspect ratio */}
+        {/* Popup Container - Landscape newspaper with 5:4 aspect ratio */}
         <div
           className={`relative border-black ${className}`}
           style={{
             backgroundColor: "transparent",
-            width: "min(90vw, 600px)",
-            aspectRatio: "3 / 4",
+            width: "min(90vw, 800px)",
+            aspectRatio: "5 / 4",
             maxHeight: "80vh",
             borderWidth: "clamp(2px, 0.5vw, 4px)",
             boxShadow:
