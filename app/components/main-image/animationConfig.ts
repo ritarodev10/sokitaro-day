@@ -43,6 +43,14 @@ export const newspaperGlowAnimationConfig = {
   initialDelay: 8000, // milliseconds - delay before glow animation starts (after all animations)
 } as const;
 
+// Ornaments Animation Configuration
+// Starts after all animations complete, same as glow:
+// - Date banner finishes: initialDelay (5000ms) + duration (3000ms) = 8000ms
+export const ornamentsAnimationConfig = {
+  initialDelay: 8000, // milliseconds - delay before ornaments spread animation starts
+  spreadDuration: 2000, // milliseconds - duration of spread animation
+} as const;
+
 /**
  * Calculate animation delay for a specific element index in a reversed sequence
  * @param totalElements - Total number of elements in the wreath

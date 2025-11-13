@@ -16,11 +16,11 @@
 /* Kraft paper background with grainy texture */
 .paper-craft-background {
   position: fixed;
-  top: 0;
-  left: 0;
+  inset: 0; /* Shorthand for top: 0, right: 0, bottom: 0, left: 0 */
   width: 100%;
   height: 100%;
   min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile - accounts for browser UI */
   background: var(--kraft-brown);
   overflow: hidden;
 }
@@ -28,10 +28,11 @@
 .paper-craft-background::before {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
+  inset: 0; /* Shorthand for top: 0, right: 0, bottom: 0, left: 0 */
   width: 100%;
   height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.05), rgba(0, 0, 0, 0)),
     url("data:image/svg+xml,%3Csvg viewBox='0 0 250 250' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.45' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
   background-size: 100% 100%, 250px 250px;
@@ -70,9 +71,18 @@
   z-index: 1;
 }
 
+html {
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
+}
+
 body {
   margin: 0;
   padding: 0;
+  height: 100%;
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
   background: var(--kraft-brown);
   color: var(--color-foreground);
   font-family: Arial, Helvetica, sans-serif;

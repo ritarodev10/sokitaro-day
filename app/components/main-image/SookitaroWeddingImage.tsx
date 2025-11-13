@@ -9,6 +9,8 @@ import {
   newspaperGlowAnimationConfig,
 } from "./animationConfig";
 import Newspaper from "./Newspaper";
+import Ornaments from "./Ornaments";
+import SookitaroText from "./SookitaroText";
 
 interface SookitaroWeddingImageProps {
   className?: string;
@@ -86,6 +88,8 @@ export default function SookitaroWeddingImage({
         className={className}
       >
         <g clipPath="url(#clip0_1_12940)">
+          {/* Ornaments Section */}
+          <Ornaments />
           {/* Header Section */}
           <SookitaroHeader />
           {/* Couple with Sign Section */}
@@ -100,6 +104,8 @@ export default function SookitaroWeddingImage({
           <g clipPath="url(#dateBannerRevealClip)">
             <DateBanner />
           </g>
+          <SookitaroText />
+          {/* Ornaments Section - rendered last to appear on top */}
         </g>
         <defs>
           <clipPath id="clip0_1_12940">
@@ -161,6 +167,7 @@ export default function SookitaroWeddingImage({
           </filter>
         </defs>
       </svg>
+
       {/* Popup Modal */}
       {isPopupOpen && (
         <div
@@ -179,7 +186,8 @@ export default function SookitaroWeddingImage({
               backgroundColor: "rgba(255, 255, 255, 0.85)",
               backdropFilter: "blur(20px) saturate(180%)",
               WebkitBackdropFilter: "blur(20px) saturate(180%)",
-              boxShadow: "8px 8px 0px 0px rgba(0,0,0,1), 0 8px 32px 0 rgba(31, 38, 135, 0.15)",
+              boxShadow:
+                "8px 8px 0px 0px rgba(0,0,0,1), 0 8px 32px 0 rgba(31, 38, 135, 0.15)",
             }}
           >
             {/* Close button - brutalism style */}
