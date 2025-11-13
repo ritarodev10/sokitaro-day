@@ -44,7 +44,7 @@ export default function SookitaroWeddingImage({
 
   // Local state to override route-based popup state when closing
   const [isPopupForceClosed, setIsPopupForceClosed] = useState(false);
-  
+
   // Envelope popup state (shown on root page before navigating to article)
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
@@ -253,10 +253,7 @@ export default function SookitaroWeddingImage({
       </svg>
 
       {/* Envelope Popup - shown on root page before navigating to article */}
-      <Popup
-        isOpen={isEnvelopeOpen}
-        onClose={handleEnvelopeClose}
-      >
+      <Popup isOpen={isEnvelopeOpen} onClose={handleEnvelopeClose}>
         <div className="flex items-center justify-center w-full h-full p-8">
           <Envelope
             onClick={handleEnvelopeOpen}
