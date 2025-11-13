@@ -5,16 +5,27 @@ import HeaderTextGreeting from "./HeaderTextGreeting";
 import HeaderTextMain from "./HeaderTextMain";
 import HeaderTextDay from "./HeaderTextDay";
 import { headerTextAnimationConfig } from "../animationConfig";
+import { useAnimation } from "../../../contexts/AnimationContext";
 
 interface HeaderTextProps {
   className?: string;
 }
 
 export default function HeaderText({ className }: HeaderTextProps) {
+  const { reanimateKey } = useAnimation();
   // Animation states for reveal animations
   const [greetingProgress, setGreetingProgress] = useState(0);
   const [mainProgress, setMainProgress] = useState(0);
   const [dayProgress, setDayProgress] = useState(0);
+
+  // Reset states when reanimating
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // Intentionally reset state when reanimateKey changes to restart animations
+    setGreetingProgress(0);
+    setMainProgress(0);
+    setDayProgress(0);
+  }, [reanimateKey]);
 
   useEffect(() => {
     const startTime = Date.now();
@@ -75,7 +86,7 @@ export default function HeaderText({ className }: HeaderTextProps) {
     }, initialDelay);
 
     return () => clearTimeout(timer);
-  }, []);
+  }, [reanimateKey]);
 
   return (
     <g className={className}>

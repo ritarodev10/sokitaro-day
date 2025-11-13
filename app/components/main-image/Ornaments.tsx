@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { ornamentsAnimationConfig } from "./animationConfig";
+import { useAnimation } from "../../contexts/AnimationContext";
 
 const SVG_WIDTH = 1449;
 const SVG_HEIGHT = 2270;
@@ -9,9 +10,18 @@ const CENTER_X = SVG_WIDTH / 2;
 const CENTER_Y = SVG_HEIGHT / 2;
 
 export default function Ornaments() {
+  const { reanimateKey } = useAnimation();
   const [scale, setScale] = useState(0);
   const [opacity, setOpacity] = useState(0);
   const animationFrameRef = useRef<number | null>(null);
+
+  // Reset states when reanimating
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // Intentionally reset state when reanimateKey changes to restart animations
+    setScale(0);
+    setOpacity(0);
+  }, [reanimateKey]);
 
   useEffect(() => {
     const { initialDelay, spreadDuration } = ornamentsAnimationConfig;
@@ -46,7 +56,7 @@ export default function Ornaments() {
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [reanimateKey]);
 
   return (
     <g

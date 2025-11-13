@@ -8,6 +8,7 @@ import {
   Merriweather,
 } from "next/font/google";
 import "./globals.css";
+import AppLayout from "./components/AppLayout";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -59,7 +60,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${merriweather.variable} antialiased`}
       >
-        {children}
+        <AppLayout>{children}</AppLayout>
       </body>
     </html>
   );

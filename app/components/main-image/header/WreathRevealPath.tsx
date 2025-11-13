@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { wreathAnimationConfig, getReversedAnimationDelay } from "../animationConfig";
+import { useAnimation } from "../../../contexts/AnimationContext";
 
 interface WreathRevealPathProps {
   d: string;
@@ -22,11 +23,14 @@ export default function WreathRevealPath({
   viewBoxHeight = 2270,
   durationMultiplier = 1,
 }: WreathRevealPathProps) {
+  const { reanimateKey } = useAnimation();
   const [revealProgress, setRevealProgress] = useState(0);
   const { duration } = wreathAnimationConfig;
   const delay = getReversedAnimationDelay(totalElements, elementIndex);
 
   useEffect(() => {
+    // Reset state when reanimating
+    setRevealProgress(0);
     const delayMs = delay * 1000; // Convert seconds to milliseconds
     const durationMs = duration * 1000 * durationMultiplier; // Convert seconds to milliseconds and apply multiplier
 
@@ -50,7 +54,7 @@ export default function WreathRevealPath({
     }, delayMs);
 
     return () => clearTimeout(timer);
-  }, [delay, duration, durationMultiplier]);
+  }, [delay, duration, durationMultiplier, reanimateKey]);
 
   // Calculate clipPath for bottom-up reveal
   const clipY = viewBoxHeight - revealProgress * viewBoxHeight;

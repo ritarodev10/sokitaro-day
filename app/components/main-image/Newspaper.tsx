@@ -1,6 +1,7 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
+import { useAnimation } from "../../contexts/AnimationContext";
 
 interface NewspaperProps {
   className?: string;
@@ -8,16 +9,77 @@ interface NewspaperProps {
   onClick?: () => void;
 }
 
+// Newspaper Animation Configuration
+// Starts at the same time as WeddingCoupleWithSign
+const newspaperAnimationConfig = {
+  initialDelay: 3500, // milliseconds - start after header text begins
+  duration: 2000, // milliseconds - fade and scale in duration
+};
+
 export default function Newspaper({
   className,
   filter,
   onClick,
 }: NewspaperProps) {
+  const { reanimateKey } = useAnimation();
+  const [opacity, setOpacity] = useState(0);
+  const [scale, setScale] = useState(0.8);
+  const animationFrameRef = useRef<number | null>(null);
+
+  // Reset states when reanimating
+  useEffect(() => {
+    // Intentionally reset state when reanimateKey changes to restart animations
+    setOpacity(0);
+    setScale(0.8);
+  }, [reanimateKey]);
+
+  useEffect(() => {
+    const { initialDelay, duration } = newspaperAnimationConfig;
+
+    const timer = setTimeout(() => {
+      const startTime = Date.now();
+
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease-out function for smooth animation
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        setOpacity(eased);
+        setScale(0.8 + eased * 0.2); // Scale from 0.8 to 1.0
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          setOpacity(1);
+          setScale(1);
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    }, initialDelay);
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [reanimateKey]);
+
+  const SVG_WIDTH = 1449;
+  const SVG_HEIGHT = 2270;
+  const CENTER_X = SVG_WIDTH / 2;
+  const CENTER_Y = SVG_HEIGHT / 2;
+
   return (
     <g
       className={className}
       filter={filter}
       onClick={onClick}
+      opacity={opacity}
+      transform={`translate(${CENTER_X}, ${CENTER_Y}) scale(${scale}) translate(${-CENTER_X}, ${-CENTER_Y})`}
       style={{ cursor: onClick ? "pointer" : "default" }}
     >
       <path

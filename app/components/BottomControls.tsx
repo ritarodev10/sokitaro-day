@@ -3,9 +3,11 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { playWebButtonSound } from "../utils/sounds";
+import { useAnimation } from "../contexts/AnimationContext";
 
 export default function BottomControls() {
   const router = useRouter();
+  const { triggerReanimate } = useAnimation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -23,6 +25,12 @@ export default function BottomControls() {
     playWebButtonSound();
     setIsMenuOpen(false);
     router.push("/");
+  };
+
+  const handleReanimateClick = () => {
+    playWebButtonSound();
+    setIsMenuOpen(false);
+    triggerReanimate();
   };
 
   return (
@@ -65,28 +73,37 @@ export default function BottomControls() {
           <div className="flex flex-col gap-1">
             <button
               onClick={handleHomeClick}
-              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors"
+              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors flex items-center gap-2"
               style={{
                 fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
               }}
             >
-              HOME
+              <span>🏠</span> HOME
             </button>
             <button
-              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors"
+              onClick={handleReanimateClick}
+              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors flex items-center gap-2"
               style={{
                 fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
               }}
             >
-              ARTICLES
+              <span>🔄</span> REANIMATE
             </button>
             <button
-              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors"
+              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors flex items-center gap-2"
               style={{
                 fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
               }}
             >
-              ABOUT
+              <span>📄</span> ARTICLES
+            </button>
+            <button
+              className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors flex items-center gap-2"
+              style={{
+                fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+              }}
+            >
+              <span>ℹ️</span> ABOUT
             </button>
           </div>
         </div>

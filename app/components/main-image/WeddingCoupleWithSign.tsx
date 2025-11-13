@@ -1,25 +1,92 @@
-import React from "react";
+"use client";
+
+import React, { useState, useEffect, useRef } from "react";
 import WomanFigure from "./couple/WomanFigure";
 import ManFigure from "./couple/ManFigure";
 import WeddingSign from "./couple/WeddingSign";
 import WeddingRings from "./couple/WeddingRings";
 import CoupleDecorations from "./couple/CoupleDecorations";
+import { useAnimation } from "../../contexts/AnimationContext";
 
 interface WeddingCoupleWithSignProps {
   className?: string;
 }
 
+// Couple Animation Configuration
+// Starts after header text, around the same time as wreath
+const coupleAnimationConfig = {
+  initialDelay: 3500, // milliseconds - start after header text begins
+  duration: 2000, // milliseconds - fade and scale in duration
+};
+
 export default function WeddingCoupleWithSign({
   className,
 }: WeddingCoupleWithSignProps) {
+  const { reanimateKey } = useAnimation();
+  const [opacity, setOpacity] = useState(0);
+  const [scale, setScale] = useState(0.8);
+  const animationFrameRef = useRef<number | null>(null);
+
+  // Reset states when reanimating
+  useEffect(() => {
+    // Intentionally reset state when reanimateKey changes to restart animations
+    setOpacity(0);
+    setScale(0.8);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reanimateKey]);
+
+  useEffect(() => {
+    const { initialDelay, duration } = coupleAnimationConfig;
+
+    const timer = setTimeout(() => {
+      const startTime = Date.now();
+
+      const animate = () => {
+        const elapsed = Date.now() - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+
+        // Ease-out function for smooth animation
+        const eased = 1 - Math.pow(1 - progress, 3);
+
+        setOpacity(eased);
+        setScale(0.8 + eased * 0.2); // Scale from 0.8 to 1.0
+
+        if (progress < 1) {
+          animationFrameRef.current = requestAnimationFrame(animate);
+        } else {
+          setOpacity(1);
+          setScale(1);
+        }
+      };
+
+      animationFrameRef.current = requestAnimationFrame(animate);
+    }, initialDelay);
+
+    return () => {
+      clearTimeout(timer);
+      if (animationFrameRef.current !== null) {
+        cancelAnimationFrame(animationFrameRef.current);
+      }
+    };
+  }, [reanimateKey]);
+
   // Color constants
   const backgroundPink = "#e6b3b3";
   const darkBrown = "#41120A";
   const oliveGreen = "#9EA269";
   const goldenBrown = "#C88C6A";
 
+  const SVG_WIDTH = 1449;
+  const SVG_HEIGHT = 2270;
+  const CENTER_X = SVG_WIDTH / 2;
+  const CENTER_Y = SVG_HEIGHT / 2;
+
   return (
-    <g className={className}>
+    <g
+      className={className}
+      opacity={opacity}
+      transform={`translate(${CENTER_X}, ${CENTER_Y}) scale(${scale}) translate(${-CENTER_X}, ${-CENTER_Y})`}
+    >
       <path
         d="M603.926 1218.71L698.425 1205.56L808.538 1472.63V1790.64L774.847 1820.22L603.926 1218.71Z"
         fill="white"

@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
+import { useAnimation } from "../../contexts/AnimationContext";
 import SookitaroHeader from "./SookitaroHeader";
 import WeddingCoupleWithSign from "./WeddingCoupleWithSign";
 import DateBanner from "./DateBanner";
@@ -41,6 +42,7 @@ export default function SookitaroWeddingImage({
 }: SookitaroWeddingImageProps) {
   const router = useRouter();
   const pathname = usePathname();
+  const { reanimateKey } = useAnimation();
 
   // Animation state for DateBanner reveal
   const [revealProgress, setRevealProgress] = useState(0);
@@ -112,8 +114,8 @@ export default function SookitaroWeddingImage({
     // Play newspaper closed sound
     playNewspaperClosedSound();
 
-    // Navigate to home
-    router.push("/");
+    // Close popup but stay on current route
+    setIsPopupForceClosed(true);
   };
 
   const handleNext = () => {
@@ -137,6 +139,14 @@ export default function SookitaroWeddingImage({
       router.push(`/article/${getArticleSlug(prevIndex)}`);
     }
   };
+
+  // Reset states when reanimating
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  useEffect(() => {
+    // Intentionally reset state when reanimateKey changes to restart animations
+    setRevealProgress(0);
+    setShowGlow(false);
+  }, [reanimateKey]);
 
   useEffect(() => {
     // Trigger the animation after component mounts
@@ -175,7 +185,7 @@ export default function SookitaroWeddingImage({
         cancelAnimationFrame(animationFrameRef.current);
       }
     };
-  }, []);
+  }, [reanimateKey]);
 
   // Trigger glow animation after all other animations complete
   useEffect(() => {
@@ -186,7 +196,7 @@ export default function SookitaroWeddingImage({
     return () => {
       clearTimeout(glowTimer);
     };
-  }, []);
+  }, [reanimateKey]);
 
   return (
     <>

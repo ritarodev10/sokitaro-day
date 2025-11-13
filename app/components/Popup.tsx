@@ -61,29 +61,13 @@ export default function Popup({
           {/* Close button - brutalism style */}
           <button
             onClick={onClose}
-            className="absolute bg-white hover:bg-black hover:text-white text-black font-black flex items-center justify-center transition-all duration-150 z-10"
+            className="absolute bg-white hover:bg-black hover:text-white text-black font-black flex items-center justify-center transition-all duration-150 z-10 border-2 border-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
             style={{
               top: "clamp(0.5rem, 1vh, 1rem)",
               right: "clamp(0.5rem, 1vh, 1rem)",
               width: "clamp(2rem, 4vw, 2.5rem)",
               height: "clamp(2rem, 4vw, 2.5rem)",
               fontSize: "clamp(1rem, 2vw, 1.5rem)",
-              borderWidth: "clamp(1px, 0.3vw, 2px)",
-              borderColor: "black",
-              borderStyle: "solid",
-              boxShadow:
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow =
-                "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-              e.currentTarget.style.transform =
-                "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow =
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
-              e.currentTarget.style.transform = "translate(0, 0)";
             }}
             aria-label="Close"
           >
