@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Image from "next/image";
 
 interface NewspaperContentProps {
   layout?: "default" | "alternative";
@@ -159,21 +160,23 @@ export default function NewspaperContent({
             }}
           >
             <div
-              className="relative bg-gray-200 border border-dashed border-gray-400 flex items-center justify-center"
+              className="relative border border-black overflow-hidden"
               style={{
                 marginBottom: "clamp(0.75rem, 2vh, 1rem)",
-                height: "clamp(8rem, 20vh, 16rem)",
+                aspectRatio: "4/5",
+                width: "100%",
                 borderWidth: "clamp(1px, 0.3vw, 2px)",
               }}
             >
-              <span
-                className="text-gray-500"
+              <Image
+                src="/assets/groom-press.webp"
+                alt="Riza"
+                fill
+                className="object-cover"
                 style={{
-                  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)",
+                  filter: "sepia(15%) contrast(1.1) brightness(0.95)",
                 }}
-              >
-                Riza Image Placeholder
-              </span>
+              />
             </div>
             <p
               className="italic text-center"
@@ -197,21 +200,23 @@ export default function NewspaperContent({
             }}
           >
             <div
-              className="relative bg-gray-200 border border-dashed border-gray-400 flex items-center justify-center"
+              className="relative border border-black overflow-hidden"
               style={{
                 marginBottom: "clamp(0.75rem, 2vh, 1rem)",
-                height: "clamp(8rem, 20vh, 16rem)",
+                aspectRatio: "4/5",
+                width: "100%",
                 borderWidth: "clamp(1px, 0.3vw, 2px)",
               }}
             >
-              <span
-                className="text-gray-500"
+              <Image
+                src="/assets/bride-press.webp"
+                alt="Sukma"
+                fill
+                className="object-cover"
                 style={{
-                  fontSize: "clamp(0.625rem, 1.5vw, 0.875rem)",
+                  filter: "sepia(15%) contrast(1.1) brightness(0.95)",
                 }}
-              >
-                Sukma Image Placeholder
-              </span>
+              />
             </div>
             <p
               className="italic text-center"

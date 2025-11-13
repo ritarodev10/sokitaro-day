@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import { playNewspaperSound } from "../utils/sounds";
 
 interface PopupProps {
   isOpen: boolean;
@@ -96,77 +97,52 @@ export default function Popup({
 
         {/* Navigation Buttons - Below the popup, separated */}
         <div
-          className="flex flex-shrink-0"
+          className="flex flex-shrink-0 gap-3"
           style={{
             marginTop: "clamp(0.5rem, 1.5vh, 1.5rem)",
-            gap: "clamp(0.75rem, 2vw, 1rem)",
           }}
         >
           <button
-            onClick={onPrevious}
+            onClick={() => {
+              if (hasPrevious && onPrevious) {
+                playNewspaperSound();
+                onPrevious();
+              }
+            }}
             disabled={!hasPrevious}
-            className={`border-black font-black transition-all duration-150 ${
+            className={`border-2 border-black font-black text-xs transition-all duration-150 ${
               hasPrevious
-                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer"
+                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
                 : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
             }`}
             style={{
-              padding: "clamp(0.5rem, 1.5vh, 0.75rem) clamp(1rem, 3vw, 2rem)",
-              fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
-              borderWidth: "clamp(1px, 0.3vw, 2px)",
-              borderStyle: "solid",
-              boxShadow:
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
-            }}
-            onMouseEnter={(e) => {
-              if (hasPrevious) {
-                e.currentTarget.style.boxShadow =
-                  "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-                e.currentTarget.style.transform =
-                  "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow =
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
-              e.currentTarget.style.transform = "translate(0, 0)";
+              fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+              padding: "clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem)",
             }}
             aria-label="Previous"
           >
-            ← Previous
+            ← PREV
           </button>
           <button
-            onClick={onNext}
+            onClick={() => {
+              if (hasNext && onNext) {
+                playNewspaperSound();
+                onNext();
+              }
+            }}
             disabled={!hasNext}
-            className={`border-black font-black transition-all duration-150 ${
+            className={`border-2 border-black font-black text-xs transition-all duration-150 ${
               hasNext
-                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer"
+                ? "bg-white hover:bg-black hover:text-white text-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
                 : "bg-gray-200 text-gray-400 cursor-not-allowed opacity-50"
             }`}
             style={{
-              padding: "clamp(0.5rem, 1.5vh, 0.75rem) clamp(1rem, 3vw, 2rem)",
-              fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
-              borderWidth: "clamp(1px, 0.3vw, 2px)",
-              borderStyle: "solid",
-              boxShadow:
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
-            }}
-            onMouseEnter={(e) => {
-              if (hasNext) {
-                e.currentTarget.style.boxShadow =
-                  "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-                e.currentTarget.style.transform =
-                  "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
-              }
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow =
-                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
-              e.currentTarget.style.transform = "translate(0, 0)";
+              fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+              padding: "clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem)",
             }}
             aria-label="Next"
           >
-            Next →
+            NEXT →
           </button>
         </div>
       </div>

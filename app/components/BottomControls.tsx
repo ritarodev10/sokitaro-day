@@ -1,16 +1,35 @@
 "use client";
 
 import React, { useState } from "react";
+import { useRouter } from "next/navigation";
+import { playWebButtonSound } from "../utils/sounds";
 
 export default function BottomControls() {
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPlaying, setIsPlaying] = useState(false);
+
+  const handleMenuClick = () => {
+    playWebButtonSound();
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const handlePlayPauseClick = () => {
+    playWebButtonSound();
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleHomeClick = () => {
+    playWebButtonSound();
+    setIsMenuOpen(false);
+    router.push("/");
+  };
 
   return (
     <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50 flex gap-3 items-center">
       {/* Menu Button */}
       <button
-        onClick={() => setIsMenuOpen(!isMenuOpen)}
+        onClick={handleMenuClick}
         className="bg-white border-2 border-black font-black text-xs px-3 py-2 transition-all duration-150 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
         style={{
           fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
@@ -23,7 +42,7 @@ export default function BottomControls() {
 
       {/* Media Player Button */}
       <button
-        onClick={() => setIsPlaying(!isPlaying)}
+        onClick={handlePlayPauseClick}
         className="bg-white border-2 border-black font-black text-xs px-3 py-2 transition-all duration-150 shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
         style={{
           fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
@@ -45,6 +64,7 @@ export default function BottomControls() {
         >
           <div className="flex flex-col gap-1">
             <button
+              onClick={handleHomeClick}
               className="text-left font-black text-xs px-2 py-1 hover:bg-black hover:text-white transition-colors"
               style={{
                 fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
@@ -74,4 +94,3 @@ export default function BottomControls() {
     </div>
   );
 }
-

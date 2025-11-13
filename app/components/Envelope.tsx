@@ -8,6 +8,7 @@ interface EnvelopeProps {
   width?: number;
   height?: number;
   onClick?: () => void;
+  inviteeName?: string;
 }
 
 export default function Envelope({
@@ -15,6 +16,7 @@ export default function Envelope({
   width,
   height,
   onClick,
+  inviteeName = "Special One",
 }: EnvelopeProps) {
   const envelopeWidth = width || 800;
   const envelopeHeight = height || 600;
@@ -47,8 +49,8 @@ export default function Envelope({
       <div
         style={{
           position: "absolute",
-          top: "59%",
-          left: "49%",
+          top: "58%",
+          left: "48%",
           transform: "translate(-50%, -50%) rotate(6deg)",
           pointerEvents: "none",
           textAlign: "center",
@@ -56,14 +58,14 @@ export default function Envelope({
       >
         <div
           style={{
-            fontSize: `${envelopeWidth * 0.06}px`,
+            fontSize: `${envelopeWidth * 0.04}px`,
             color: "#F7D898",
             fontWeight: "bold",
             fontFamily: "sans-serif",
             letterSpacing: "2px",
           }}
         >
-          SUKMA
+          {inviteeName.toUpperCase()}
         </div>
       </div>
     </div>
