@@ -54,7 +54,7 @@ export default function SookitaroWeddingImage({
   };
 
   const articleIndexFromPath = getArticleIndexFromPath();
-  
+
   // Popup is open if route indicates it AND not force closed
   const isPopupOpen = articleIndexFromPath >= 0 && !isPopupForceClosed;
   const currentPopupIndex =
