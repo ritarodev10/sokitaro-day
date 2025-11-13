@@ -70,7 +70,8 @@ export default function SookitaroWeddingImage({
   };
 
   const handleClose = () => {
-    router.push("/");
+    // Don't change route, just close the popup by setting force close state
+    setIsPopupForceClosed(true);
   };
 
   const handleNext = () => {
