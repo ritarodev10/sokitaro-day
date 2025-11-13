@@ -253,16 +253,29 @@ export default function SookitaroWeddingImage({
       </svg>
 
       {/* Envelope Popup - shown on root page before navigating to article */}
-      <Popup isOpen={isEnvelopeOpen} onClose={handleEnvelopeClose}>
-        <div className="flex items-center justify-center w-full h-full p-8">
-          <Envelope
-            onClick={handleEnvelopeOpen}
-            width={600}
-            height={450}
-            className="cursor-pointer hover:scale-105 transition-transform duration-300"
-          />
+      {isEnvelopeOpen && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center"
+          onClick={handleEnvelopeClose}
+          style={{
+            backdropFilter: "blur(8px)",
+            WebkitBackdropFilter: "blur(8px)",
+            backgroundColor: "rgba(0, 0, 0, 0.05)",
+          }}
+        >
+          <div
+            onClick={(e) => e.stopPropagation()}
+            className="flex items-center justify-center"
+          >
+            <Envelope
+              onClick={handleEnvelopeOpen}
+              width={600}
+              height={450}
+              className="cursor-pointer hover:scale-105 transition-transform duration-300"
+            />
+          </div>
         </div>
-      </Popup>
+      )}
 
       {/* Article Popup Modal */}
       <Popup
