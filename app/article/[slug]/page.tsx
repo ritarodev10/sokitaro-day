@@ -3,6 +3,15 @@
 import { motion } from "framer-motion";
 import SookitaroWeddingImage from "../../components/main-image/SookitaroWeddingImage";
 
+// Article slugs that should be statically generated
+const articleSlugs = ["headline", "article-2"];
+
+export function generateStaticParams() {
+  return articleSlugs.map((slug) => ({
+    slug: slug,
+  }));
+}
+
 export default function ArticlePage() {
   return (
     <div className="paper-craft-background">
@@ -13,12 +22,9 @@ export default function ArticlePage() {
           transition={{ duration: 1, ease: "easeOut" }}
           className="relative w-full h-dvh flex items-center justify-center"
         >
-          <SookitaroWeddingImage 
-            className="w-full h-full md:h-[900px] object-contain multiply-blend"
-          />
+          <SookitaroWeddingImage className="w-full h-full md:h-[900px] object-contain multiply-blend" />
         </motion.div>
       </div>
     </div>
   );
 }
-

@@ -36,11 +36,11 @@ export default function SookitaroWeddingImage({
 }: SookitaroWeddingImageProps) {
   const router = useRouter();
   const pathname = usePathname();
-  
+
   // Animation state for DateBanner reveal
   const [revealProgress, setRevealProgress] = useState(0);
   const animationFrameRef = useRef<number | null>(null);
-  
+
   // Derive popup state from route
   const getArticleIndexFromPath = () => {
     if (pathname.startsWith("/article/")) {
@@ -52,8 +52,9 @@ export default function SookitaroWeddingImage({
 
   const articleIndexFromPath = getArticleIndexFromPath();
   const isPopupOpen = articleIndexFromPath >= 0;
-  const currentPopupIndex = articleIndexFromPath >= 0 ? articleIndexFromPath : 0;
-  
+  const currentPopupIndex =
+    articleIndexFromPath >= 0 ? articleIndexFromPath : 0;
+
   // Glow visibility state - starts hidden, appears after all animations
   const [showGlow, setShowGlow] = useState(false);
 
