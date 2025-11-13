@@ -43,7 +43,6 @@ export default function SookitaroWeddingImage({
 
   // Local state to override route-based popup state when closing
   const [isPopupForceClosed, setIsPopupForceClosed] = useState(false);
-  const previousPathnameRef = useRef<string>("");
 
   // Derive popup state from route
   const getArticleIndexFromPath = () => {
@@ -55,15 +54,6 @@ export default function SookitaroWeddingImage({
   };
 
   const articleIndexFromPath = getArticleIndexFromPath();
-  
-  // Reset force close state when route changes (user navigates via next/prev)
-  // Use useEffect to avoid calling setState during render
-  useEffect(() => {
-    if (pathname !== previousPathnameRef.current && articleIndexFromPath >= 0) {
-      setIsPopupForceClosed(false);
-      previousPathnameRef.current = pathname;
-    }
-  }, [pathname, articleIndexFromPath]);
   
   // Popup is open if route indicates it AND not force closed
   const isPopupOpen = articleIndexFromPath >= 0 && !isPopupForceClosed;
@@ -92,6 +82,7 @@ export default function SookitaroWeddingImage({
   const handleNext = () => {
     if (currentPopupIndex < popupContents.length - 1) {
       const nextIndex = currentPopupIndex + 1;
+      setIsPopupForceClosed(false); // Reset force close when navigating
       router.push(`/article/${getArticleSlug(nextIndex)}`);
     }
   };
@@ -99,6 +90,7 @@ export default function SookitaroWeddingImage({
   const handlePrevious = () => {
     if (currentPopupIndex > 0) {
       const prevIndex = currentPopupIndex - 1;
+      setIsPopupForceClosed(false); // Reset force close when navigating
       router.push(`/article/${getArticleSlug(prevIndex)}`);
     }
   };
