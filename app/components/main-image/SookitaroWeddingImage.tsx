@@ -18,7 +18,6 @@ import Envelope from "../Envelope";
 import {
   playNewspaperSound,
   playNewspaperClosedSound,
-  playWebButtonSound,
 } from "../../utils/sounds";
 
 interface SookitaroWeddingImageProps {
@@ -110,8 +109,8 @@ export default function SookitaroWeddingImage({
   };
 
   const handleClose = () => {
-    // Play web button sound
-    playWebButtonSound();
+    // Play newspaper closed sound
+    playNewspaperClosedSound();
 
     // Navigate to home
     router.push("/");

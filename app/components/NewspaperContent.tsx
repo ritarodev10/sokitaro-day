@@ -255,8 +255,6 @@ export default function NewspaperContent({
               fontFamily: "var(--font-playfair-display)",
               color: "#2a2a2a",
               fontSize: "clamp(0.625rem, 2vw, 1.125rem)",
-              columnCount: layout === "default" ? 2 : 1,
-              columnGap: "clamp(1rem, 2.5vw, 2rem)",
             }}
           >
             <p
@@ -264,10 +262,10 @@ export default function NewspaperContent({
                 marginBottom: "clamp(0.75rem, 2vh, 1rem)",
               }}
             >
-              WAGIR – The talk of the town: Riza and Sukma. People joke
-              it&apos;s love, signed, sealed, Riza dodged anmily it&apos;s love,
-              signed smile, Sokma answered warm, smile. The &apos;sign&apos; day
-              reportedly will be called Sookitaro Day.
+              WAGIR – The talk of the town: Riza and Sukma. Locals jokingly call
+              it an “acquisition deal”, but everyone knows it’s really love —
+              signed, sealed, and soon delivered. Riza dodged the spotlight with
+              a shy grin, while Sukma answered with her signature warm smile.
             </p>
           </div>
         </div>
