@@ -14,7 +14,7 @@ export default function NewspaperContent({
     <div
       className="relative"
       style={{
-        fontFamily: "var(--font-playfair-display)",
+        fontFamily: "var(--font-merriweather)",
         backgroundColor: "#f5f1e8",
         padding: "clamp(1rem, 3vw, 2rem)",
         paddingTop: "clamp(1.5rem, 4vw, 3rem)",
@@ -98,8 +98,9 @@ export default function NewspaperContent({
           </h1>
           <p
             style={{
-              fontFamily: "var(--font-playfair-display)",
+              fontFamily: "var(--font-merriweather)",
               fontStyle: "italic",
+              fontWeight: "700",
               color: "#4a4a4a",
               fontSize: "clamp(0.875rem, 2vw, 1.25rem)",
             }}
@@ -132,8 +133,9 @@ export default function NewspaperContent({
           </h2>
           <p
             style={{
-              fontFamily: "var(--font-playfair-display)",
+              fontFamily: "var(--font-merriweather)",
               fontStyle: "italic",
+              fontWeight: "700",
               color: "#2a2a2a",
               fontSize: "clamp(0.875rem, 2.5vw, 1.5rem)",
               marginBottom: "clamp(0.75rem, 2vh, 1rem)",
@@ -181,7 +183,8 @@ export default function NewspaperContent({
             <p
               className="italic text-center"
               style={{
-                fontFamily: "var(--font-playfair-display)",
+                fontFamily: "var(--font-merriweather)",
+                fontWeight: "700",
                 color: "#1a1a1a",
                 fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
@@ -221,7 +224,8 @@ export default function NewspaperContent({
             <p
               className="italic text-center"
               style={{
-                fontFamily: "var(--font-playfair-display)",
+                fontFamily: "var(--font-merriweather)",
+                fontWeight: "700",
                 color: "#1a1a1a",
                 fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               }}
@@ -241,7 +245,8 @@ export default function NewspaperContent({
           <p
             className="font-semibold"
             style={{
-              fontFamily: "var(--font-playfair-display)",
+              fontFamily: "var(--font-merriweather)",
+              fontWeight: "700",
               color: "#1a1a1a",
               fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
               marginBottom: "clamp(0.5rem, 1vh, 0.75rem)",
@@ -252,9 +257,10 @@ export default function NewspaperContent({
           <div
             className="leading-relaxed"
             style={{
-              fontFamily: "var(--font-playfair-display)",
+              fontFamily: "var(--font-merriweather)",
+              fontWeight: "400",
               color: "#2a2a2a",
-              fontSize: "clamp(0.625rem, 2vw, 1.125rem)",
+              fontSize: "clamp(0.75rem, 2vw, 1.125rem)",
             }}
           >
             <p

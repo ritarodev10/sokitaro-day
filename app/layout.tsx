@@ -5,6 +5,7 @@ import {
   Caveat,
   Bebas_Neue,
   Playfair_Display,
+  Merriweather,
 } from "next/font/google";
 import "./globals.css";
 
@@ -36,6 +37,12 @@ const playfairDisplay = Playfair_Display({
   weight: ["400", "500", "600", "700"],
 });
 
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
+  subsets: ["latin"],
+  weight: ["400", "700", "900"],
+});
+
 export const metadata: Metadata = {
   title: "Sokitaro Day",
   description:
@@ -50,7 +57,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="light" style={{ colorScheme: "light" }}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${bebasNeue.variable} ${playfairDisplay.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${merriweather.variable} antialiased`}
       >
         {children}
       </body>
