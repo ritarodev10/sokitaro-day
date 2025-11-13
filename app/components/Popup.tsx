@@ -53,7 +53,8 @@ export default function Popup({
             aspectRatio: "3 / 4",
             maxHeight: "80vh",
             borderWidth: "clamp(2px, 0.5vw, 4px)",
-            boxShadow: "clamp(4px, 1vw, 8px) clamp(4px, 1vw, 8px) 0px 0px rgba(0,0,0,1)",
+            boxShadow:
+              "clamp(4px, 1vw, 8px) clamp(4px, 1vw, 8px) 0px 0px rgba(0,0,0,1)",
           }}
         >
           {/* Close button - brutalism style */}
@@ -69,14 +70,18 @@ export default function Popup({
               borderWidth: "clamp(1px, 0.3vw, 2px)",
               borderColor: "black",
               borderStyle: "solid",
-              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+              boxShadow:
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-              e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+              e.currentTarget.style.boxShadow =
+                "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.transform =
+                "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.boxShadow =
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
               e.currentTarget.style.transform = "translate(0, 0)";
             }}
             aria-label="Close"
@@ -110,16 +115,20 @@ export default function Popup({
               fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
               borderWidth: "clamp(1px, 0.3vw, 2px)",
               borderStyle: "solid",
-              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+              boxShadow:
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
             }}
             onMouseEnter={(e) => {
               if (hasPrevious) {
-                e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-                e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+                e.currentTarget.style.boxShadow =
+                  "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+                e.currentTarget.style.transform =
+                  "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.boxShadow =
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
               e.currentTarget.style.transform = "translate(0, 0)";
             }}
             aria-label="Previous"
@@ -139,16 +148,20 @@ export default function Popup({
               fontSize: "clamp(0.875rem, 2vw, 1.125rem)",
               borderWidth: "clamp(1px, 0.3vw, 2px)",
               borderStyle: "solid",
-              boxShadow: "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
+              boxShadow:
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)",
             }}
             onMouseEnter={(e) => {
               if (hasNext) {
-                e.currentTarget.style.boxShadow = "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
-                e.currentTarget.style.transform = "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
+                e.currentTarget.style.boxShadow =
+                  "clamp(0.5px, 0.15vw, 1px) clamp(0.5px, 0.15vw, 1px) 0px 0px rgba(0,0,0,1)";
+                e.currentTarget.style.transform =
+                  "translate(clamp(0.5px, 0.15vw, 1px), clamp(0.5px, 0.15vw, 1px))";
               }
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.boxShadow = "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
+              e.currentTarget.style.boxShadow =
+                "clamp(1px, 0.3vw, 2px) clamp(1px, 0.3vw, 2px) 0px 0px rgba(0,0,0,1)";
               e.currentTarget.style.transform = "translate(0, 0)";
             }}
             aria-label="Next"
@@ -160,4 +173,3 @@ export default function Popup({
     </div>
   );
 }
-
