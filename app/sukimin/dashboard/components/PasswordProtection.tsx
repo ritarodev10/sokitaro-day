@@ -1,41 +1,51 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { useState, useEffect } from "react";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
-const PASSWORD = "Sookitaro1989!"
-const STORAGE_KEY = "dashboard_authenticated"
+const PASSWORD = "Sookitaro171125!";
+const STORAGE_KEY = "dashboard_authenticated";
 
-export function PasswordProtection({ children }: { children: React.ReactNode }) {
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState("")
-  const [isOpen, setIsOpen] = useState(true)
+export function PasswordProtection({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [isOpen, setIsOpen] = useState(true);
 
   useEffect(() => {
     // Check if already authenticated in this session
-    const stored = localStorage.getItem(STORAGE_KEY)
+    const stored = localStorage.getItem(STORAGE_KEY);
     if (stored === "true") {
-      setIsAuthenticated(true)
-      setIsOpen(false)
+      setIsAuthenticated(true);
+      setIsOpen(false);
     }
-  }, [])
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    setError("")
-    
+    e.preventDefault();
+    setError("");
+
     if (password === PASSWORD) {
-      setIsAuthenticated(true)
-      setIsOpen(false)
-      localStorage.setItem(STORAGE_KEY, "true")
+      setIsAuthenticated(true);
+      setIsOpen(false);
+      localStorage.setItem(STORAGE_KEY, "true");
     } else {
-      setError("Incorrect password. Please try again.")
-      setPassword("")
+      setError("Incorrect password. Please try again.");
+      setPassword("");
     }
-  }
+  };
 
   if (!isAuthenticated) {
     return (
@@ -54,14 +64,12 @@ export function PasswordProtection({ children }: { children: React.ReactNode }) 
                 placeholder="Enter password"
                 value={password}
                 onChange={(e) => {
-                  setPassword(e.target.value)
-                  setError("")
+                  setPassword(e.target.value);
+                  setError("");
                 }}
                 autoFocus
               />
-              {error && (
-                <p className="text-sm text-destructive">{error}</p>
-              )}
+              {error && <p className="text-sm text-destructive">{error}</p>}
             </div>
             <Button type="submit" className="w-full">
               Access Dashboard
@@ -69,9 +77,8 @@ export function PasswordProtection({ children }: { children: React.ReactNode }) 
           </form>
         </DialogContent>
       </Dialog>
-    )
+    );
   }
 
-  return <>{children}</>
+  return <>{children}</>;
 }
-
