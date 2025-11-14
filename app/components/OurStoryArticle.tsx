@@ -154,7 +154,6 @@ export default function OurStoryArticle() {
           className="relative border border-black overflow-hidden bg-white/50"
           style={{
             marginBottom: "clamp(0.75rem, 2vh, 1rem)",
-            aspectRatio: "4/3",
             width: "100%",
             borderWidth: "clamp(1px, 0.3vw, 2px)",
           }}
@@ -162,8 +161,9 @@ export default function OurStoryArticle() {
           <Image
             src="/assets/press-overtime.webp"
             alt="Press office with employees working overtime"
-            fill
-            className="object-cover"
+            width={1200}
+            height={800}
+            className="w-full h-auto"
             style={{
               filter: "grayscale(100%) contrast(1.1) brightness(0.95)",
             }}
