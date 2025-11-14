@@ -15,6 +15,7 @@ import Ornaments from "./Ornaments";
 import SookitaroText from "./SookitaroText";
 import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
+import GroomArticle from "../GroomArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -76,7 +77,7 @@ export default function SookitaroWeddingImage({
   // Example: You can have multiple popup contents
   const popupContents = [
     <NewspaperContent key={0} layout="default" />,
-    <NewspaperContent key={1} layout="alternative" />,
+    <GroomArticle key={1} />,
     // Add more popup contents here as needed
   ];
 
