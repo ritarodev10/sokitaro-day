@@ -51,6 +51,8 @@ export default function Popup({
           backdropFilter: "blur(8px)",
           WebkitBackdropFilter: "blur(8px)",
           backgroundColor: "rgba(0, 0, 0, 0.05)",
+          height: "100dvh",
+          minHeight: "100dvh",
         }}
       >
         <div
@@ -67,7 +69,7 @@ export default function Popup({
             style={{
               fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
               padding: "clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem)",
-              marginTop: "clamp(1rem, 2vh, 1.5rem)",
+              marginTop: "clamp(1rem, 2dvh, 1.5rem)",
             }}
             aria-label="Back to home"
           >
@@ -87,6 +89,8 @@ export default function Popup({
         backdropFilter: "blur(8px)",
         WebkitBackdropFilter: "blur(8px)",
         backgroundColor: "rgba(0, 0, 0, 0.05)",
+        height: "100dvh",
+        minHeight: "100dvh",
       }}
     >
       {/* Container for popup and buttons - Landscape newspaper size */}
@@ -96,6 +100,8 @@ export default function Popup({
         style={{
           width: "min(90vw, 800px)",
           maxWidth: "min(90vw, 800px)",
+          maxHeight: "90dvh",
+          padding: "clamp(0.5rem, 2dvh, 1rem)",
         }}
       >
         {/* Popup Container - Landscape newspaper with 5:4 aspect ratio */}
@@ -105,7 +111,7 @@ export default function Popup({
             backgroundColor: "transparent",
             width: "min(90vw, 800px)",
             aspectRatio: "5 / 4",
-            maxHeight: "80vh",
+            maxHeight: "calc(90dvh - 80px)",
             borderWidth: "clamp(2px, 0.5vw, 4px)",
             boxShadow:
               "clamp(4px, 1vw, 8px) clamp(4px, 1vw, 8px) 0px 0px rgba(0,0,0,1)",
@@ -116,8 +122,8 @@ export default function Popup({
             onClick={onClose}
             className="absolute bg-white hover:bg-black hover:text-white text-black font-black flex items-center justify-center transition-all duration-150 z-10 border-2 border-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
             style={{
-              top: "clamp(0.5rem, 1vh, 1rem)",
-              right: "clamp(0.5rem, 1vh, 1rem)",
+              top: "clamp(0.5rem, 1dvh, 1rem)",
+              right: "clamp(0.5rem, 1dvh, 1rem)",
               width: "clamp(2rem, 4vw, 2.5rem)",
               height: "clamp(2rem, 4vw, 2.5rem)",
               fontSize: "clamp(1rem, 2vw, 1.5rem)",
@@ -139,7 +145,7 @@ export default function Popup({
         <div
           className="flex flex-shrink-0 gap-3"
           style={{
-            marginTop: "clamp(0.5rem, 1.5vh, 1.5rem)",
+            marginTop: "clamp(0.5rem, 1.5dvh, 1.5rem)",
           }}
         >
           <button

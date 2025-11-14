@@ -45,7 +45,8 @@ export default function BottomControls() {
               className="bg-white border-2 border-black font-black transition-all duration-150 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-px hover:translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               style={{
                 fontSize: "clamp(0.5rem, 1.2vw, 0.65rem)",
-                padding: "clamp(0.25rem, 0.8vw, 0.4rem) clamp(0.5rem, 1.5vw, 0.75rem)",
+                padding:
+                  "clamp(0.25rem, 0.8vw, 0.4rem) clamp(0.5rem, 1.5vw, 0.75rem)",
               }}
               aria-label={isPlaying ? "Pause" : "Play"}
             >
@@ -58,7 +59,8 @@ export default function BottomControls() {
               className="bg-white border-2 border-black font-black transition-all duration-150 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-px hover:translate-y-px active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
               style={{
                 fontSize: "clamp(0.5rem, 1.2vw, 0.65rem)",
-                padding: "clamp(0.25rem, 0.8vw, 0.4rem) clamp(0.5rem, 1.5vw, 0.75rem)",
+                padding:
+                  "clamp(0.25rem, 0.8vw, 0.4rem) clamp(0.5rem, 1.5vw, 0.75rem)",
               }}
               aria-label="Open song on Suno"
             >
