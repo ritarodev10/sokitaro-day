@@ -8,8 +8,10 @@ import {
   InvitationProvider,
   useInvitation,
 } from "../contexts/InvitationContext";
+import { MusicProvider } from "../contexts/MusicContext";
 import SookitaroWeddingImage from "./main-image/SookitaroWeddingImage";
 import { dateBannerAnimationConfig } from "./main-image/animationConfig";
+import BottomControls from "./BottomControls";
 
 interface AppLayoutProps {
   children?: ReactNode;
@@ -145,7 +147,7 @@ function AppLayoutContent({ children }: AppLayoutProps) {
             </div>
           )}
         </motion.div>
-        {/* <BottomControls /> */}
+        <BottomControls />
         {children}
       </div>
     </div>
@@ -164,7 +166,9 @@ export default function AppLayout({ children }: AppLayoutProps) {
   return (
     <InvitationProvider>
       <AnimationProvider>
-        <AppLayoutContent>{children}</AppLayoutContent>
+        <MusicProvider>
+          <AppLayoutContent>{children}</AppLayoutContent>
+        </MusicProvider>
       </AnimationProvider>
     </InvitationProvider>
   );
