@@ -56,21 +56,56 @@ export default function SookitaroWeddingImage({
   // Envelope popup state (shown on root page before navigating to article)
   const [isEnvelopeOpen, setIsEnvelopeOpen] = useState(false);
 
-  // Derive popup state from route
-  const getArticleIndexFromPath = () => {
+  // Track if we're updating from internal navigation (to prevent URL sync loop)
+  const isInternalNavigationRef = useRef(false);
+
+  // Internal state for current article index (source of truth for navigation)
+  const [currentArticleIndex, setCurrentArticleIndex] = useState(() => {
+    // Initialize from URL on mount
+    if (typeof window !== "undefined") {
+      const path = window.location.pathname;
+      if (path.startsWith("/article/")) {
+        const slug = path.split("/article/")[1];
+        const index = getArticleIndex(slug);
+        return index >= 0 ? index : 0;
+      }
+    }
+    return 0;
+  });
+
+  // Sync URL when article index changes from internal navigation
+  useEffect(() => {
+    if (isInternalNavigationRef.current) {
+      const slug = getArticleSlug(currentArticleIndex);
+      const expectedPath = `/article/${slug}`;
+
+      // Only update URL if it's different (avoid unnecessary updates)
+      if (pathname !== expectedPath) {
+        router.replace(expectedPath);
+      }
+      // Reset flag after URL sync
+      isInternalNavigationRef.current = false;
+    }
+  }, [currentArticleIndex, router, pathname]);
+
+  // Initialize from URL on mount or when pathname changes from outside (browser back/forward)
+  useEffect(() => {
+    // Skip if this is from our internal navigation
+    if (isInternalNavigationRef.current) {
+      return;
+    }
+
     if (pathname.startsWith("/article/")) {
       const slug = pathname.split("/article/")[1];
-      return getArticleIndex(slug);
+      const index = getArticleIndex(slug);
+      if (index >= 0 && index !== currentArticleIndex) {
+        setCurrentArticleIndex(index);
+      }
     }
-    return -1;
-  };
+  }, [pathname, currentArticleIndex]); // Sync state when URL changes from external navigation
 
-  const articleIndexFromPath = getArticleIndexFromPath();
-
-  // Popup is open if route indicates it AND not force closed
-  const isPopupOpen = articleIndexFromPath >= 0 && !isPopupForceClosed;
-  const currentPopupIndex =
-    articleIndexFromPath >= 0 ? articleIndexFromPath : 0;
+  // Popup is open if on article route AND not force closed
+  const isPopupOpen = pathname.startsWith("/article/") && !isPopupForceClosed;
 
   // Glow visibility state - starts hidden, appears after all animations
   const [showGlow, setShowGlow] = useState(false);
@@ -102,7 +137,9 @@ export default function SookitaroWeddingImage({
 
     // Close envelope and navigate to article
     setIsEnvelopeOpen(false);
-    router.push("/article/headline");
+    setIsPopupForceClosed(false); // Ensure popup opens
+    isInternalNavigationRef.current = true; // Mark as internal navigation
+    setCurrentArticleIndex(0); // Set to first article (URL will sync via useEffect)
   };
 
   const handleEnvelopeClose = () => {
@@ -122,24 +159,26 @@ export default function SookitaroWeddingImage({
   };
 
   const handleNext = () => {
-    if (currentPopupIndex < popupContents.length - 1) {
+    if (currentArticleIndex < popupContents.length - 1) {
       // Play newspaper sound
       playNewspaperSound();
 
-      const nextIndex = currentPopupIndex + 1;
+      const nextIndex = currentArticleIndex + 1;
       setIsPopupForceClosed(false); // Reset force close when navigating
-      router.push(`/article/${getArticleSlug(nextIndex)}`);
+      isInternalNavigationRef.current = true; // Mark as internal navigation
+      setCurrentArticleIndex(nextIndex); // Update state (URL will sync via useEffect)
     }
   };
 
   const handlePrevious = () => {
-    if (currentPopupIndex > 0) {
+    if (currentArticleIndex > 0) {
       // Play newspaper sound
       playNewspaperSound();
 
-      const prevIndex = currentPopupIndex - 1;
+      const prevIndex = currentArticleIndex - 1;
       setIsPopupForceClosed(false); // Reset force close when navigating
-      router.push(`/article/${getArticleSlug(prevIndex)}`);
+      isInternalNavigationRef.current = true; // Mark as internal navigation
+      setCurrentArticleIndex(prevIndex); // Update state (URL will sync via useEffect)
     }
   };
 
@@ -323,10 +362,10 @@ export default function SookitaroWeddingImage({
         onClose={handleClose}
         onNext={handleNext}
         onPrevious={handlePrevious}
-        hasNext={currentPopupIndex < popupContents.length - 1}
-        hasPrevious={currentPopupIndex > 0}
+        hasNext={currentArticleIndex < popupContents.length - 1}
+        hasPrevious={currentArticleIndex > 0}
       >
-        {popupContents[currentPopupIndex]}
+        {popupContents[currentArticleIndex]}
       </Popup>
     </>
   );
