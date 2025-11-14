@@ -16,6 +16,7 @@ import SookitaroText from "./SookitaroText";
 import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
 import GroomArticle from "../GroomArticle";
+import BrideArticle from "../BrideArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -27,7 +28,7 @@ interface SookitaroWeddingImageProps {
 }
 
 // Map article slugs to indices
-const articleSlugs = ["headline", "article-2"];
+const articleSlugs = ["headline", "article-2", "article-3"];
 const getArticleIndex = (slug?: string): number => {
   if (!slug) return -1;
   const index = articleSlugs.indexOf(slug);
@@ -78,6 +79,7 @@ export default function SookitaroWeddingImage({
   const popupContents = [
     <NewspaperContent key={0} layout="default" />,
     <GroomArticle key={1} />,
+    <BrideArticle key={2} />,
     // Add more popup contents here as needed
   ];
 
