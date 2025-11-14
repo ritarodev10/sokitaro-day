@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
-import { supabase } from "@/lib/supabase"
+import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import { Invitation } from "@/lib/types/invitation"
 import { generateInviteCode } from "@/lib/utils/invite-code"
 import {
@@ -91,6 +91,15 @@ export function InvitationForm({
   }, [invitation, open, form])
 
   const onSubmit = async (values: FormValues) => {
+    if (!isSupabaseConfigured) {
+      toast({
+        title: "Error",
+        description: "Supabase is not configured. Please add your credentials to .env.local",
+        variant: "destructive",
+      })
+      return
+    }
+
     try {
       setIsSubmitting(true)
 

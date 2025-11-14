@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import { supabase } from "@/lib/supabase"
+import { supabase, isSupabaseConfigured } from "@/lib/supabase"
 import { Invitation } from "@/lib/types/invitation"
 import {
   Table,
@@ -33,6 +33,11 @@ export function InvitationTable() {
   const { toast } = useToast()
 
   const fetchInvitations = async () => {
+    if (!isSupabaseConfigured) {
+      setLoading(false)
+      return
+    }
+
     try {
       setLoading(true)
       const { data, error } = await supabase
@@ -64,7 +69,7 @@ export function InvitationTable() {
   }
 
   const handleDelete = async () => {
-    if (!invitationToDelete) return
+    if (!invitationToDelete || !isSupabaseConfigured) return
 
     try {
       const { error } = await supabase
@@ -104,6 +109,29 @@ export function InvitationTable() {
     setIsFormOpen(false)
     setEditingInvitation(null)
     fetchInvitations()
+  }
+
+  if (!isSupabaseConfigured) {
+    return (
+      <div className="rounded-md border p-8 bg-muted/50">
+        <div className="text-center space-y-4">
+          <h3 className="text-lg font-semibold">Supabase Not Configured</h3>
+          <p className="text-muted-foreground">
+            Please configure your Supabase credentials to use the dashboard.
+          </p>
+          <div className="mt-4 p-4 bg-background rounded-md text-left text-sm space-y-2">
+            <p className="font-medium">Add these to your <code className="bg-muted px-1 py-0.5 rounded">.env.local</code> file:</p>
+            <pre className="bg-muted p-3 rounded overflow-x-auto">
+{`NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key`}
+            </pre>
+            <p className="text-xs text-muted-foreground mt-2">
+              After adding the credentials, restart your development server.
+            </p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   if (loading) {

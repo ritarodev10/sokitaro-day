@@ -7,7 +7,9 @@ const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || ''
 const isValidUrl = supabaseUrl && supabaseUrl.startsWith('http')
 const isValidKey = supabaseAnonKey && supabaseAnonKey.length > 0
 
-if (!isValidUrl || !isValidKey) {
+export const isSupabaseConfigured = isValidUrl && isValidKey
+
+if (!isSupabaseConfigured) {
   if (typeof window === 'undefined') {
     // Server-side: only warn in development
     if (process.env.NODE_ENV === 'development') {
@@ -21,9 +23,9 @@ if (!isValidUrl || !isValidKey) {
   }
 }
 
-// Use placeholder values that won't cause errors but will fail gracefully on API calls
-export const supabase = createClient(
-  isValidUrl ? supabaseUrl : 'https://placeholder.supabase.co',
-  isValidKey ? supabaseAnonKey : 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZS1kZW1vIiwicm9sZSI6ImFub24iLCJleHAiOjE5ODM4MTI5OTZ9.CRXP1A7WOeoJeXxjNni43kdQwgnWNReilDMblYTn_I0'
-)
+// Only create client if we have valid credentials
+// Otherwise, create a client that will fail gracefully
+export const supabase = isSupabaseConfigured
+  ? createClient(supabaseUrl, supabaseAnonKey)
+  : createClient('https://placeholder.supabase.co', 'placeholder-key')
 
