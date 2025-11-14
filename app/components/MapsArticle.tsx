@@ -230,39 +230,22 @@ export default function MapsArticle() {
               </p>
             </div>
 
-            {/* Map Link Placeholder */}
-            <div
-              className="border border-black"
+            {/* Map Link Button */}
+            <a
+              href="https://maps.app.goo.gl/hj6kSLppWuabDzbK7"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-black font-black text-xs transition-all duration-150 bg-white hover:bg-black hover:text-white text-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none inline-block text-center"
               style={{
-                padding: "clamp(0.75rem, 2vw, 1rem)",
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                borderWidth: "clamp(1px, 0.3vw, 2px)",
-                textAlign: "center",
+                fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+                padding: "clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2.5vw, 1.5rem)",
+                width: "100%",
+                textDecoration: "none",
+                display: "block",
               }}
             >
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "700",
-                  color: "#1a1a1a",
-                  fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
-                  marginBottom: "clamp(0.25rem, 0.75vh, 0.5rem)",
-                }}
-              >
-                🗺️ MAP LINK
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "400",
-                  color: "#4a4a4a",
-                  fontSize: "clamp(0.65rem, 1.6vw, 0.9rem)",
-                  fontStyle: "italic",
-                }}
-              >
-                Available for invitees
-              </p>
-            </div>
+              🗺️ OPEN MAP
+            </a>
           </div>
         </div>
 
@@ -373,39 +356,22 @@ export default function MapsArticle() {
               </p>
             </div>
 
-            {/* Map Link Placeholder */}
-            <div
-              className="border border-black"
+            {/* Map Link Button */}
+            <a
+              href="https://maps.app.goo.gl/3BG3JAYW5WY4Z7LM9"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="border-2 border-black font-black text-xs transition-all duration-150 bg-white hover:bg-black hover:text-white text-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none inline-block text-center"
               style={{
-                padding: "clamp(0.75rem, 2vw, 1rem)",
-                backgroundColor: "rgba(255, 255, 255, 0.5)",
-                borderWidth: "clamp(1px, 0.3vw, 2px)",
-                textAlign: "center",
+                fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+                padding: "clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2.5vw, 1.5rem)",
+                width: "100%",
+                textDecoration: "none",
+                display: "block",
               }}
             >
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "700",
-                  color: "#1a1a1a",
-                  fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
-                  marginBottom: "clamp(0.25rem, 0.75vh, 0.5rem)",
-                }}
-              >
-                🗺️ MAP LINK
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "400",
-                  color: "#4a4a4a",
-                  fontSize: "clamp(0.65rem, 1.6vw, 0.9rem)",
-                  fontStyle: "italic",
-                }}
-              >
-                Available for invitees
-              </p>
-            </div>
+              🗺️ OPEN MAP
+            </a>
           </div>
         </div>
 
