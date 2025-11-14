@@ -138,23 +138,21 @@ export default function GroomArticle() {
           </p>
         </div>
 
-        {/* Main Content Area - Responsive layout */}
+        {/* Main Content Area - Image on left, text on right */}
         <div
-          className="grid grid-cols-1 md:grid-cols-[1fr_1.5fr] gap-4"
+          className="grid grid-cols-[1fr_1.5fr] gap-4"
           style={{
             gap: "clamp(0.75rem, 2vw, 1.5rem)",
             marginBottom: "clamp(0.75rem, 2vh, 1rem)",
           }}
         >
           {/* Left Panel - Image */}
-          <div className="flex flex-col order-1 md:order-1">
+          <div className="flex flex-col">
             <div
               className="relative border border-black overflow-hidden bg-white/50"
               style={{
                 aspectRatio: "3/4",
                 width: "100%",
-                maxWidth: "300px",
-                margin: "0 auto",
                 borderWidth: "clamp(1px, 0.3vw, 2px)",
               }}
             >
@@ -168,25 +166,10 @@ export default function GroomArticle() {
                 }}
               />
             </div>
-            {/* Description paragraph - shown below image on mobile */}
-            <p
-              className="md:hidden mt-3"
-              style={{
-                fontFamily: "var(--font-merriweather)",
-                fontWeight: "400",
-                color: "#2a2a2a",
-                fontSize: "clamp(0.7rem, 1.6vw, 0.95rem)",
-                lineHeight: "1.5",
-              }}
-            >
-              A calm, tech-minded gentleman with a gentle presence and a steady
-              heart. Known for his soft-spoken charm and thoughtful way of
-              seeing the world.
-            </p>
           </div>
 
           {/* Right Panel - Name and Info */}
-          <div className="flex flex-col justify-start order-2 md:order-2">
+          <div className="flex flex-col justify-start">
             <h3
               className="font-bold leading-none mb-2"
               style={{
@@ -205,28 +188,12 @@ export default function GroomArticle() {
                 fontFamily: "var(--font-merriweather)",
                 fontWeight: "400",
                 color: "#2a2a2a",
-                fontSize: "clamp(0.8rem, 1.8vw, 1.05rem)",
+                fontSize: "clamp(0.9rem, 2.5vw, 1.25rem)",
                 marginBottom: "clamp(0.75rem, 2vh, 1rem)",
                 lineHeight: "1.4",
               }}
             >
               Son of Mr. H. Moh. Hamzah, S.Ag. & Mrs. Hj. Astuty Hamzah, M.Ag.
-            </p>
-            {/* Description paragraph - shown on desktop only */}
-            <p
-              className="hidden md:block"
-              style={{
-                fontFamily: "var(--font-merriweather)",
-                fontWeight: "400",
-                color: "#2a2a2a",
-                fontSize: "clamp(0.7rem, 1.6vw, 0.95rem)",
-                marginBottom: "clamp(0.5rem, 1.5vh, 0.75rem)",
-                lineHeight: "1.5",
-              }}
-            >
-              A calm, tech-minded gentleman with a gentle presence and a steady
-              heart. Known for his soft-spoken charm and thoughtful way of
-              seeing the world.
             </p>
           </div>
         </div>
@@ -252,10 +219,19 @@ export default function GroomArticle() {
                 marginBottom: "clamp(0.5rem, 1.5vh, 0.75rem)",
               }}
             >
+              A calm, tech-minded gentleman with a gentle presence and a steady
+              heart. Known for his soft-spoken charm and thoughtful way of
+              seeing the world.
+            </p>{" "}
+            <p
+              style={{
+                marginBottom: "clamp(0.5rem, 1.5vh, 0.75rem)",
+              }}
+            >
               After six silent years on the sidelines, nearly losing the bid
               entirely, he re-entered the race at the very last moment,
-              surpassed every candidate ahead of him, and secured the acquisition
-              that mattered most.
+              surpassed every candidate ahead of him, and secured the
+              acquisition that mattered most.
             </p>
             <p
               style={{
@@ -280,4 +256,3 @@ export default function GroomArticle() {
     </div>
   );
 }
-
