@@ -159,7 +159,7 @@ export default function OurStoryArticle() {
           }}
         >
           <Image
-            src="/assets/press-overtime.webp"
+            src="/assets/press-overtime-2.webp"
             alt="Press office with employees working overtime"
             width={1200}
             height={800}

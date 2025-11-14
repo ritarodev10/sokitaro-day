@@ -224,17 +224,6 @@ export default function EventScheduleArticle() {
                 A quiet, sacred morning where two hearts officially sign their
                 chapter.
               </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "400",
-                  color: "#4a4a4a",
-                  fontSize: "clamp(0.65rem, 1.6vw, 0.9rem)",
-                  fontStyle: "italic",
-                }}
-              >
-                Map link available for invitees.
-              </p>
             </div>
           </div>
         </div>
@@ -309,17 +298,6 @@ export default function EventScheduleArticle() {
                 A simple, homey reception celebrating the very first hours of
                 Sookitaro Day — warm, close-knit, and filled with family
                 presence.
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "400",
-                  color: "#4a4a4a",
-                  fontSize: "clamp(0.65rem, 1.6vw, 0.9rem)",
-                  fontStyle: "italic",
-                }}
-              >
-                Map link available for invitees.
               </p>
             </div>
           </div>
@@ -405,17 +383,6 @@ export default function EventScheduleArticle() {
                 }}
               >
                 A heartfelt family gathering, version 2.0.
-              </p>
-              <p
-                style={{
-                  fontFamily: "var(--font-merriweather)",
-                  fontWeight: "400",
-                  color: "#4a4a4a",
-                  fontSize: "clamp(0.65rem, 1.6vw, 0.9rem)",
-                  fontStyle: "italic",
-                }}
-              >
-                Map link available for invitees.
               </p>
             </div>
           </div>
