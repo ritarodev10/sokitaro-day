@@ -1,9 +1,13 @@
 "use client";
 
 import { ReactNode, useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { AnimationProvider, useAnimation } from "../contexts/AnimationContext";
+import {
+  InvitationProvider,
+  useInvitation,
+} from "../contexts/InvitationContext";
 import SookitaroWeddingImage from "./main-image/SookitaroWeddingImage";
 import { dateBannerAnimationConfig } from "./main-image/animationConfig";
 
@@ -21,6 +25,62 @@ const ALL_ANIMATIONS_COMPLETE_DELAY =
 function AppLayoutContent({ children }: AppLayoutProps) {
   const { reanimateKey } = useAnimation();
   const [showHint, setShowHint] = useState(false);
+  const pathname = usePathname();
+  const router = useRouter();
+  const { fetchInvitation, loading } = useInvitation();
+  const [hasProcessedInvite, setHasProcessedInvite] = useState(false);
+
+  // Reset processing state when pathname changes to a known route
+  useEffect(() => {
+    if (
+      pathname === "/" ||
+      pathname.startsWith("/article") ||
+      pathname.startsWith("/sukimin")
+    ) {
+      setHasProcessedInvite(false);
+    }
+  }, [pathname]);
+
+  // Handle invite code from URL path (runs for all routes)
+  useEffect(() => {
+    if (hasProcessedInvite || loading || !pathname) return;
+
+    // Skip known routes
+    if (
+      pathname === "/" ||
+      pathname.startsWith("/article") ||
+      pathname.startsWith("/sukimin")
+    ) {
+      return;
+    }
+
+    // Extract invite code (remove leading slash)
+    const inviteCode = pathname.slice(1);
+
+    // Validate it looks like an invite code
+    if (!inviteCode || inviteCode.includes("/")) {
+      return;
+    }
+
+    // Process the invite code
+    setHasProcessedInvite(true);
+
+    console.log("AppLayout: Processing invite code:", inviteCode);
+
+    fetchInvitation(inviteCode)
+      .then(() => {
+        console.log("AppLayout: Invitation fetched, redirecting...");
+        setTimeout(() => {
+          router.replace("/");
+        }, 100);
+      })
+      .catch((err) => {
+        console.error("AppLayout: Failed to fetch invitation:", err);
+        setTimeout(() => {
+          router.replace("/");
+        }, 1000);
+      });
+  }, [pathname, fetchInvitation, router, hasProcessedInvite, loading]);
 
   // Show hint text after all entrance animations complete
   useEffect(() => {
@@ -33,6 +93,26 @@ function AppLayoutContent({ children }: AppLayoutProps) {
       setShowHint(false);
     };
   }, [reanimateKey]);
+
+  // Show loading state if processing invite code
+  if (
+    hasProcessedInvite &&
+    pathname &&
+    pathname !== "/" &&
+    !pathname.startsWith("/article") &&
+    !pathname.startsWith("/sukimin")
+  ) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-background">
+        <div className="text-center space-y-4">
+          <p className="text-lg font-medium">Loading your invitation...</p>
+          {loading && (
+            <p className="text-sm text-muted-foreground">Please wait</p>
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="paper-craft-background">
@@ -82,8 +162,10 @@ export default function AppLayout({ children }: AppLayoutProps) {
   }
 
   return (
-    <AnimationProvider>
-      <AppLayoutContent>{children}</AppLayoutContent>
-    </AnimationProvider>
+    <InvitationProvider>
+      <AnimationProvider>
+        <AppLayoutContent>{children}</AppLayoutContent>
+      </AnimationProvider>
+    </InvitationProvider>
   );
 }

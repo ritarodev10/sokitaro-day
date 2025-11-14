@@ -2,7 +2,7 @@
 
 export const playNewspaperSound = () => {
   try {
-    const audio = new Audio("/assets/sounds/newspaper-opened.mp3");
+    const audio = new Audio("/assets/sounds/newspaper-opened-3.mp3");
     audio.volume = 0.5; // Set volume to 50%
     audio.play().catch((error) => {
       // Handle autoplay restrictions
@@ -38,4 +38,3 @@ export const playWebButtonSound = () => {
     console.log("Error playing sound:", error);
   }
 };
-

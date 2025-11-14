@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useRouter, usePathname } from "next/navigation";
 import { useAnimation } from "../../contexts/AnimationContext";
+import { useInvitation } from "../../contexts/InvitationContext";
 import SookitaroHeader from "./SookitaroHeader";
 import WeddingCoupleWithSign from "./WeddingCoupleWithSign";
 import DateBanner from "./DateBanner";
@@ -73,6 +74,7 @@ export default function SookitaroWeddingImage({
   const router = useRouter();
   const pathname = usePathname();
   const { reanimateKey } = useAnimation();
+  const { invitation } = useInvitation();
 
   // Animation state for DateBanner reveal
   const [revealProgress, setRevealProgress] = useState(0);
@@ -392,6 +394,7 @@ export default function SookitaroWeddingImage({
               width={600}
               height={450}
               className="cursor-pointer hover:scale-105 transition-transform duration-300"
+              inviteeName={invitation?.invitee_name || "Special One"}
             />
           </div>
         </div>
