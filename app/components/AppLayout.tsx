@@ -1,6 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
+import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
 import { AnimationProvider } from "../contexts/AnimationContext";
 import SookitaroWeddingImage from "./main-image/SookitaroWeddingImage";
@@ -11,6 +12,14 @@ interface AppLayoutProps {
 }
 
 export default function AppLayout({ children }: AppLayoutProps) {
+  const pathname = usePathname();
+  const isDashboard = pathname?.startsWith("/sukimin");
+
+  // Skip AppLayout for dashboard routes
+  if (isDashboard) {
+    return <>{children}</>;
+  }
+
   return (
     <AnimationProvider>
       <div className="paper-craft-background">
@@ -19,15 +28,14 @@ export default function AppLayout({ children }: AppLayoutProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, ease: "easeOut" }}
-            className="relative w-full flex-1 flex items-center justify-center pb-10"
+            className="relative w-full flex-1 flex items-center justify-center pb-5"
           >
             <SookitaroWeddingImage className="w-full h-full max-h-[85vh] md:max-h-[800px] object-contain multiply-blend" />
           </motion.div>
-          <BottomControls />
+          {/* <BottomControls /> */}
           {children}
         </div>
       </div>
     </AnimationProvider>
   );
 }
-

@@ -20,6 +20,7 @@ import BrideArticle from "../BrideArticle";
 import OurStoryArticle from "../OurStoryArticle";
 import EventScheduleArticle from "../EventScheduleArticle";
 import MapsArticle from "../MapsArticle";
+import ThankYouArticle from "../ThankYouArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -38,6 +39,7 @@ const articleSlugs = [
   "our-story",
   "event-schedule",
   "maps",
+  "thank-you",
 ];
 
 // Map article indices to page names
@@ -48,6 +50,7 @@ const articleNames = [
   "Our Story",
   "Event Schedule",
   "Maps",
+  "Thank You",
 ];
 
 const getArticleIndex = (slug?: string): number => {
@@ -143,6 +146,7 @@ export default function SookitaroWeddingImage({
     <OurStoryArticle key={3} />,
     <EventScheduleArticle key={4} />,
     <MapsArticle key={5} />,
+    <ThankYouArticle key={6} />,
     // Add more popup contents here as needed
   ];
 
@@ -183,6 +187,13 @@ export default function SookitaroWeddingImage({
   const handleClose = () => {
     // Play newspaper closed sound
     playNewspaperClosedSound();
+
+    // If on thank you page, navigate to home
+    if (currentArticleIndex === popupContents.length - 1) {
+      router.push("/");
+      setIsPopupForceClosed(true);
+      return;
+    }
 
     // Close popup but stay on current route
     setIsPopupForceClosed(true);
@@ -404,6 +415,7 @@ export default function SookitaroWeddingImage({
             ? getArticleName(currentArticleIndex - 1)
             : undefined
         }
+        isThankYouPage={currentArticleIndex === popupContents.length - 1}
       >
         {popupContents[currentArticleIndex]}
       </Popup>

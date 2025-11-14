@@ -14,6 +14,7 @@ interface PopupProps {
   hasPrevious?: boolean;
   nextPageName?: string;
   previousPageName?: string;
+  isThankYouPage?: boolean;
 }
 
 export default function Popup({
@@ -27,6 +28,7 @@ export default function Popup({
   hasPrevious = false,
   nextPageName,
   previousPageName,
+  isThankYouPage = false,
 }: PopupProps) {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
 
@@ -39,6 +41,44 @@ export default function Popup({
 
   if (!isOpen) return null;
 
+  // Thank you page - render like Envelope (without popup card, just over blur bg)
+  if (isThankYouPage) {
+    return (
+      <div
+        className="fixed inset-0 z-[100] flex items-center justify-center"
+        onClick={onClose}
+        style={{
+          backdropFilter: "blur(8px)",
+          WebkitBackdropFilter: "blur(8px)",
+          backgroundColor: "rgba(0, 0, 0, 0.05)",
+        }}
+      >
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className="flex flex-col items-center justify-center"
+        >
+          {/* Content */}
+          <div className="flex items-center justify-center">{children}</div>
+
+          {/* Close button - Below the content */}
+          <button
+            onClick={onClose}
+            className="border-2 border-black font-black text-xs transition-all duration-150 bg-white hover:bg-black hover:text-white text-black cursor-pointer shadow-[3px_3px_0px_0px_rgba(0,0,0,1)] hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)] hover:translate-x-[2px] hover:translate-y-[2px] active:translate-x-[3px] active:translate-y-[3px] active:shadow-none"
+            style={{
+              fontSize: "clamp(0.625rem, 1.5vw, 0.75rem)",
+              padding: "clamp(0.375rem, 1vw, 0.5rem) clamp(0.75rem, 2vw, 1rem)",
+              marginTop: "clamp(1rem, 2vh, 1.5rem)",
+            }}
+            aria-label="Back to home"
+          >
+            back to home
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  // Regular popup with card
   return (
     <div
       className="fixed inset-0 z-[100] flex flex-col items-center justify-center"

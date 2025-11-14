@@ -7,6 +7,7 @@ import {
   Playfair_Display,
   Merriweather,
 } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import AppLayout from "./components/AppLayout";
 
@@ -61,6 +62,11 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${caveat.variable} ${bebasNeue.variable} ${playfairDisplay.variable} ${merriweather.variable} antialiased`}
       >
         <AppLayout>{children}</AppLayout>
+        <Script
+          src="https://cloud.umami.is/script.js"
+          data-website-id="45da3f26-c929-47e5-98f2-5acd84c66576"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
