@@ -19,6 +19,7 @@ import GroomArticle from "../GroomArticle";
 import BrideArticle from "../BrideArticle";
 import OurStoryArticle from "../OurStoryArticle";
 import EventScheduleArticle from "../EventScheduleArticle";
+import MapsArticle from "../MapsArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -36,6 +37,7 @@ const articleSlugs = [
   "article-3",
   "our-story",
   "event-schedule",
+  "maps",
 ];
 
 // Map article indices to page names
@@ -45,6 +47,7 @@ const articleNames = [
   "The Bride",
   "Our Story",
   "Event Schedule",
+  "Maps",
 ];
 
 const getArticleIndex = (slug?: string): number => {
@@ -139,6 +142,7 @@ export default function SookitaroWeddingImage({
     <BrideArticle key={2} />,
     <OurStoryArticle key={3} />,
     <EventScheduleArticle key={4} />,
+    <MapsArticle key={5} />,
     // Add more popup contents here as needed
   ];
 

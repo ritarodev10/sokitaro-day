@@ -5,6 +5,7 @@ const articleSlugs = [
   "article-3",
   "our-story",
   "event-schedule",
+  "maps",
 ];
 
 export function generateStaticParams() {
