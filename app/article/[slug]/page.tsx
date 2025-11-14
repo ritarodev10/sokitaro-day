@@ -1,5 +1,11 @@
 // Article slugs that should be statically generated
-const articleSlugs = ["headline", "article-2", "article-3", "our-story"];
+const articleSlugs = [
+  "headline",
+  "article-2",
+  "article-3",
+  "our-story",
+  "event-schedule",
+];
 
 export function generateStaticParams() {
   return articleSlugs.map((slug) => ({

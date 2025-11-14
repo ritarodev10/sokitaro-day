@@ -99,7 +99,7 @@ export default function OurStoryArticle() {
               fontSize: "clamp(0.75rem, 1.8vw, 1rem)",
             }}
           >
-            FEATURE EDITION
+            FEATURE EDITION – 17 NOVEMBER 2025
           </p>
         </div>
 
@@ -182,7 +182,7 @@ export default function OurStoryArticle() {
             textAlign: "center",
           }}
         >
-          Pressmen are working overtime — please stand by.
+          Ink drying… plates aligning… love story loading.
         </p>
 
         {/* Subheading */}
