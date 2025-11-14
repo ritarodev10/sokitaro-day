@@ -18,6 +18,7 @@ import NewspaperContent from "../NewspaperContent";
 import GroomArticle from "../GroomArticle";
 import BrideArticle from "../BrideArticle";
 import OurStoryArticle from "../OurStoryArticle";
+import EventScheduleArticle from "../EventScheduleArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -29,7 +30,23 @@ interface SookitaroWeddingImageProps {
 }
 
 // Map article slugs to indices
-const articleSlugs = ["headline", "article-2", "article-3", "our-story"];
+const articleSlugs = [
+  "headline",
+  "article-2",
+  "article-3",
+  "our-story",
+  "event-schedule",
+];
+
+// Map article indices to page names
+const articleNames = [
+  "Headline",
+  "The Groom",
+  "The Bride",
+  "Our Story",
+  "Event Schedule",
+];
+
 const getArticleIndex = (slug?: string): number => {
   if (!slug) return -1;
   const index = articleSlugs.indexOf(slug);
@@ -38,6 +55,10 @@ const getArticleIndex = (slug?: string): number => {
 
 const getArticleSlug = (index: number): string => {
   return articleSlugs[index] || "headline";
+};
+
+const getArticleName = (index: number): string => {
+  return articleNames[index] || "Article";
 };
 
 export default function SookitaroWeddingImage({
@@ -117,6 +138,7 @@ export default function SookitaroWeddingImage({
     <GroomArticle key={1} />,
     <BrideArticle key={2} />,
     <OurStoryArticle key={3} />,
+    <EventScheduleArticle key={4} />,
     // Add more popup contents here as needed
   ];
 
@@ -368,6 +390,16 @@ export default function SookitaroWeddingImage({
         onPrevious={handlePrevious}
         hasNext={currentArticleIndex < popupContents.length - 1}
         hasPrevious={currentArticleIndex > 0}
+        nextPageName={
+          currentArticleIndex < popupContents.length - 1
+            ? getArticleName(currentArticleIndex + 1)
+            : undefined
+        }
+        previousPageName={
+          currentArticleIndex > 0
+            ? getArticleName(currentArticleIndex - 1)
+            : undefined
+        }
       >
         {popupContents[currentArticleIndex]}
       </Popup>

@@ -12,6 +12,8 @@ interface PopupProps {
   onPrevious?: () => void;
   hasNext?: boolean;
   hasPrevious?: boolean;
+  nextPageName?: string;
+  previousPageName?: string;
 }
 
 export default function Popup({
@@ -23,6 +25,8 @@ export default function Popup({
   onPrevious,
   hasNext = false,
   hasPrevious = false,
+  nextPageName,
+  previousPageName,
 }: PopupProps) {
   if (!isOpen) return null;
 
@@ -105,7 +109,7 @@ export default function Popup({
             }}
             aria-label="Previous"
           >
-            ← PREV
+            ← {previousPageName || "PREV"}
           </button>
           <button
             onClick={() => {
@@ -126,7 +130,7 @@ export default function Popup({
             }}
             aria-label="Next"
           >
-            NEXT →
+            {nextPageName || "NEXT"} →
           </button>
         </div>
       </div>
