@@ -234,8 +234,8 @@ export default function GroomArticle() {
                 marginBottom: "clamp(0.5rem, 1.5vh, 0.75rem)",
               }}
             >
-              After six silent years on the sidelines — nearly losing the bid
-              entirely — he re-entered the race at the very last moment,
+              After six silent years on the sidelines, nearly losing the bid
+              entirely, he re-entered the race at the very last moment,
               surpassed every candidate ahead of him, and secured the acquisition
               that mattered most.
             </p>
