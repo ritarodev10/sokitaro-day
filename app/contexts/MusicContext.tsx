@@ -16,11 +16,12 @@ export function MusicProvider({ children }: { children: ReactNode }) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const hasAttemptedAutoplay = useRef(false);
 
-  // Initialize audio on mount and attempt autoplay
+  // Initialize audio on mount, load in background, and autoplay when ready
   useEffect(() => {
     const audio = new Audio("/assets/sounds/bermimpi lagi-demo-ver.mp3");
     audio.volume = 0.6; // Set volume to 60% for background music
     audio.loop = true; // Loop continuously
+    audio.preload = "auto"; // Preload the audio in the background
     audioRef.current = audio;
 
     // Handle audio events
@@ -32,57 +33,46 @@ export function MusicProvider({ children }: { children: ReactNode }) {
     audio.addEventListener("pause", handlePause);
     audio.addEventListener("ended", handleEnded);
 
-    // Set up fallback for user interaction (only if autoplay fails)
-    let interactionListenersSet = false;
-    const setupUserInteractionFallback = () => {
-      if (interactionListenersSet) return;
-      interactionListenersSet = true;
-
-      const handleFirstInteraction = async () => {
-        if (hasAttemptedAutoplay.current) return;
-        try {
-          await audio.play();
-          hasAttemptedAutoplay.current = true;
-          // Remove listeners after successful play
-          document.removeEventListener("click", handleFirstInteraction);
-          document.removeEventListener("touchstart", handleFirstInteraction);
-          document.removeEventListener("keydown", handleFirstInteraction);
-        } catch (err) {
-          console.log("Play failed on user interaction:", err);
-        }
-      };
-
-      document.addEventListener("click", handleFirstInteraction, { once: true });
-      document.addEventListener("touchstart", handleFirstInteraction, { once: true });
-      document.addEventListener("keydown", handleFirstInteraction, { once: true });
-    };
-
-    // Attempt autoplay when audio is ready
-    const attemptAutoplay = async () => {
+    // Play automatically when audio is fully loaded
+    const playWhenReady = async () => {
       if (hasAttemptedAutoplay.current) return;
       
       try {
-        await audio.play();
-        hasAttemptedAutoplay.current = true;
+        // Wait a tiny bit to ensure audio is ready
+        if (audio.readyState >= 3) {
+          await audio.play();
+          hasAttemptedAutoplay.current = true;
+        }
       } catch (error) {
-        // Autoplay was prevented by browser, set up fallback for user interaction
-        console.log("Autoplay prevented, will try on user interaction");
-        setupUserInteractionFallback();
+        // If autoplay fails, try again on next ready state
+        console.log("Autoplay attempt failed, will retry when fully loaded:", error);
       }
     };
 
-    // Try to play when audio can play through (loaded enough)
-    audio.addEventListener("canplaythrough", attemptAutoplay, { once: true });
-    
-    // Also try immediately (in case audio is already cached/ready)
-    attemptAutoplay();
+    // Listen for when audio is fully loaded and ready to play
+    const handleCanPlayThrough = () => {
+      playWhenReady();
+    };
+
+    const handleLoadedData = () => {
+      playWhenReady();
+    };
+
+    audio.addEventListener("canplaythrough", handleCanPlayThrough, { once: true });
+    audio.addEventListener("loadeddata", handleLoadedData, { once: true });
+
+    // If audio is already loaded (cached), play immediately
+    if (audio.readyState >= 3) {
+      playWhenReady();
+    }
 
     // Cleanup
     return () => {
       audio.removeEventListener("play", handlePlay);
       audio.removeEventListener("pause", handlePause);
       audio.removeEventListener("ended", handleEnded);
-      audio.removeEventListener("canplaythrough", attemptAutoplay);
+      audio.removeEventListener("canplaythrough", handleCanPlayThrough);
+      audio.removeEventListener("loadeddata", handleLoadedData);
       audio.pause();
       audioRef.current = null;
     };
