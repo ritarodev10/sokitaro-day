@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { playNewspaperSound } from "../utils/sounds";
 
 interface PopupProps {
@@ -28,6 +28,15 @@ export default function Popup({
   nextPageName,
   previousPageName,
 }: PopupProps) {
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+
+  // Reset scroll position when children change (article changes)
+  useEffect(() => {
+    if (scrollContainerRef.current && isOpen) {
+      scrollContainerRef.current.scrollTop = 0;
+    }
+  }, [children, isOpen]);
+
   if (!isOpen) return null;
 
   return (
@@ -78,7 +87,10 @@ export default function Popup({
             ×
           </button>
           {/* Scrollable Popup content */}
-          <div className="h-full overflow-y-auto overflow-x-hidden">
+          <div
+            ref={scrollContainerRef}
+            className="h-full overflow-y-auto overflow-x-hidden"
+          >
             {children}
           </div>
         </div>
