@@ -17,6 +17,7 @@ import Popup from "../Popup";
 import NewspaperContent from "../NewspaperContent";
 import GroomArticle from "../GroomArticle";
 import BrideArticle from "../BrideArticle";
+import OurStoryArticle from "../OurStoryArticle";
 import Envelope from "../Envelope";
 import {
   playNewspaperSound,
@@ -28,7 +29,7 @@ interface SookitaroWeddingImageProps {
 }
 
 // Map article slugs to indices
-const articleSlugs = ["headline", "article-2", "article-3"];
+const articleSlugs = ["headline", "article-2", "article-3", "our-story"];
 const getArticleIndex = (slug?: string): number => {
   if (!slug) return -1;
   const index = articleSlugs.indexOf(slug);
@@ -115,6 +116,7 @@ export default function SookitaroWeddingImage({
     <NewspaperContent key={0} layout="default" />,
     <GroomArticle key={1} />,
     <BrideArticle key={2} />,
+    <OurStoryArticle key={3} />,
     // Add more popup contents here as needed
   ];
 
@@ -139,7 +141,9 @@ export default function SookitaroWeddingImage({
     setIsEnvelopeOpen(false);
     setIsPopupForceClosed(false); // Ensure popup opens
     isInternalNavigationRef.current = true; // Mark as internal navigation
-    setCurrentArticleIndex(0); // Set to first article (URL will sync via useEffect)
+    setCurrentArticleIndex(0); // Set to first article
+    // Navigate immediately so popup shows up
+    router.push("/article/headline");
   };
 
   const handleEnvelopeClose = () => {
